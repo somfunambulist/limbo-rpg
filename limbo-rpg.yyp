@@ -21,6 +21,7 @@
   "resources":[
     {"id":{"name":"Room1","path":"rooms/Room1/Room1.yy",},},
     {"id":{"name":"test","path":"scripts/test/test.yy",},},
+    {"id":{"name":"s_box","path":"sprites/s_box/s_box.yy",},},
   ],
   "resourceType":"GMProject",
   "resourceVersion":"2.0",
