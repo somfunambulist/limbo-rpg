@@ -1,12 +1,12 @@
 {
   "$GMScript":"v1",
-  "%Name":"test",
+  "%Name":"draw_ux",
   "isCompatibility":false,
   "isDnD":false,
-  "name":"test",
+  "name":"draw_ux",
   "parent":{
-    "name":"limbo-rpg",
-    "path":"limbo-rpg.yyp",
+    "name":"scripts",
+    "path":"folders/scripts.yy",
   },
   "resourceType":"GMScript",
   "resourceVersion":"2.0",

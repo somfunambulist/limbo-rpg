@@ -10,6 +10,10 @@
   },
   "defaultScriptType":1,
   "Folders":[
+    {"$GMFolder":"","%Name":"fonts","folderPath":"folders/fonts.yy","name":"fonts","resourceType":"GMFolder","resourceVersion":"2.0",},
+    {"$GMFolder":"","%Name":"scripts","folderPath":"folders/scripts.yy","name":"scripts","resourceType":"GMFolder","resourceVersion":"2.0",},
+    {"$GMFolder":"","%Name":"objects","folderPath":"folders/objects.yy","name":"objects","resourceType":"GMFolder","resourceVersion":"2.0",},
+    {"$GMFolder":"","%Name":"rooms","folderPath":"folders/rooms.yy","name":"rooms","resourceType":"GMFolder","resourceVersion":"2.0",},
     {"$GMFolder":"","%Name":"sprites","folderPath":"folders/sprites.yy","name":"sprites","resourceType":"GMFolder","resourceVersion":"2.0",},
   ],
   "ForcedPrefabProjectReferences":[],
@@ -21,14 +25,16 @@
   },
   "name":"limbo-rpg",
   "resources":[
-    {"id":{"name":"Room1","path":"rooms/Room1/Room1.yy",},},
-    {"id":{"name":"test","path":"scripts/test/test.yy",},},
+    {"id":{"name":"f_monogram","path":"fonts/f_monogram/f_monogram.yy",},},
+    {"id":{"name":"o_test","path":"objects/o_test/o_test.yy",},},
+    {"id":{"name":"r_test","path":"rooms/r_test/r_test.yy",},},
+    {"id":{"name":"draw_ux","path":"scripts/draw_ux/draw_ux.yy",},},
     {"id":{"name":"s_box","path":"sprites/s_box/s_box.yy",},},
   ],
   "resourceType":"GMProject",
   "resourceVersion":"2.0",
   "RoomOrderNodes":[
-    {"roomId":{"name":"Room1","path":"rooms/Room1/Room1.yy",},},
+    {"roomId":{"name":"r_test","path":"rooms/r_test/r_test.yy",},},
   ],
   "templateType":"game",
   "TextureGroups":[
