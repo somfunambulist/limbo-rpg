@@ -1,8 +1,22 @@
 menu = 0;
-menu_select = 2;
+menu_select = 0;
+menu_page = "";
+page_category = 0;
+page_active = 0;
+page_select = 0;
 
 gold = 0;
 gametime = 0;
+
+#region //inventory
+    for(i=0;i<999;i+=1) {
+        inventory[i] = -1;
+    }
+    inventory[0] = global.item_potion;
+    inventory[1] = global.item_antidote;
+    inventory[2] = global.item_hi_potion;
+    inventory[3] = global.item_mega_potion;
+#endregion
 
 #region //party data
 
@@ -17,7 +31,7 @@ gametime = 0;
             class :     "Lost Child",
             status :    "Healthy",
             lv :    1,      xp :    0,
-            hp :    30,     dmg :   0,
+            hp :    999,     dmg :   0,
             mp :    10,     drn :   0
             
         }
