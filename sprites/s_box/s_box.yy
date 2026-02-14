@@ -20,6 +20,7 @@
   "height":12,
   "HTile":false,
   "layers":[
+    {"$GMImageLayer":"","%Name":"4ac77725-d622-4871-b98b-a2daafb7bcc6","blendMode":0,"displayName":"pasteLayer","isLocked":false,"name":"4ac77725-d622-4871-b98b-a2daafb7bcc6","opacity":100.0,"resourceType":"GMImageLayer","resourceVersion":"2.0","visible":true,},
     {"$GMImageLayer":"","%Name":"ff1cc154-5b02-4747-acb5-3dadd9cbce4f","blendMode":0,"displayName":"pasteLayer","isLocked":false,"name":"ff1cc154-5b02-4747-acb5-3dadd9cbce4f","opacity":100.0,"resourceType":"GMImageLayer","resourceVersion":"2.0","visible":true,},
   ],
   "name":"s_box",

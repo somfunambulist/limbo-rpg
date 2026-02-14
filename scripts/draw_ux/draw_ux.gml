@@ -5,8 +5,14 @@ function draw_box(sprite_index,x,y,width,height,color){
 }
 
 function draw_monogram(x,y,color,string){
-    draw_set_font(f_monogram);
     var shadow = make_colour_rgb(25, 30, 60);
+    draw_set_font(f_monogram);
     draw_text_ext_color(x,y-3,string,12,-1,shadow,shadow,shadow,shadow,1);
     draw_text_ext_color(x,y-4,string,12,-1,color,color,color,color,1);
+}
+
+function draw_pointer(x,y,subimg,color){
+    var shadow = make_colour_rgb(25, 30, 60);
+    draw_sprite_ext(s_pointer,subimg,x,y+1,1,1,0,shadow,1);
+    draw_sprite_ext(s_pointer,subimg,x,y,1,1,0,color,1);
 }
