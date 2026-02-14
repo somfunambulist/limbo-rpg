@@ -3,29 +3,36 @@ if menu = 1 {
     draw_box(s_box,0,0,320,240,menuback);
     
     #region //party members
-        var px = 20; var py = 20;
-        draw_monogram(px,py,c_white,"12letterName");    draw_monogram(px+96,py,c_white,"Healthy");
-        draw_monogram(px+36,py+12,c_white,"Level");     draw_monogram(px+78,py+12,c_white,"99");        draw_monogram(px+96,py+12,c_white,"ClassName");
-        draw_monogram(px+36,py+24,c_white,"HP");        draw_monogram(px+78,py+24,c_white,"999 / 999");
-        draw_monogram(px+36,py+36,c_white,"MP");        draw_monogram(px+78,py+36,c_white,"999 / 999");
+        var px = 20; var py = 20; var pm = 0;
+        if party[0] != -1 {
+            draw_monogram(px,py,c_white,party[pm].name);    draw_monogram(px+96,py,c_white,party[pm].status);
+            draw_monogram(px+36,py+12,c_white,"Level");     draw_monogram(px+78,py+12,c_white,party[pm].lv);        draw_monogram(px+96,py+12,c_white,party[pm].class);
+            draw_monogram(px+36,py+24,c_white,"HP");        draw_monogram(px+78,py+24,c_white,string(party[pm].hp-party[pm].dmg)+"/"+string(party[pm].hp));
+            draw_monogram(px+36,py+36,c_white,"MP");        draw_monogram(px+78,py+36,c_white,string(party[pm].mp-party[pm].drn)+"/"+string(party[pm].mp));
+            }
+        px = 20; py = 72; pm = 1;
+        if party[1] != -1 {
+            draw_monogram(px,py,c_white,party[pm].name);    draw_monogram(px+96,py,c_white,party[pm].status);
+            draw_monogram(px+36,py+12,c_white,"Level");     draw_monogram(px+78,py+12,c_white,party[pm].lv);        draw_monogram(px+96,py+12,c_white,party[pm].class);
+            draw_monogram(px+36,py+24,c_white,"HP");        draw_monogram(px+78,py+24,c_white,string(party[pm].hp-party[pm].dmg)+"/"+string(party[pm].hp));
+            draw_monogram(px+36,py+36,c_white,"MP");        draw_monogram(px+78,py+36,c_white,string(party[pm].mp-party[pm].drn)+"/"+string(party[pm].mp));
+            }
         
-        px = 20; py = 72;
-        draw_monogram(px,py,c_white,"12letterName");    draw_monogram(px+96,py,c_white,"Healthy");
-        draw_monogram(px+36,py+12,c_white,"Level");     draw_monogram(px+78,py+12,c_white,"99");        draw_monogram(px+96,py+12,c_white,"ClassName");
-        draw_monogram(px+36,py+24,c_white,"HP");        draw_monogram(px+78,py+24,c_white,"999 / 999");
-        draw_monogram(px+36,py+36,c_white,"MP");        draw_monogram(px+78,py+36,c_white,"999 / 999");
+        px = 20; py = 124; pm = 2;
+        if party[2] != -1 {
+            draw_monogram(px,py,c_white,party[pm].name);    draw_monogram(px+96,py,c_white,party[pm].status);
+            draw_monogram(px+36,py+12,c_white,"Level");     draw_monogram(px+78,py+12,c_white,party[pm].lv);        draw_monogram(px+96,py+12,c_white,party[pm].class);
+            draw_monogram(px+36,py+24,c_white,"HP");        draw_monogram(px+78,py+24,c_white,string(party[pm].hp-party[pm].dmg)+"/"+string(party[pm].hp));
+            draw_monogram(px+36,py+36,c_white,"MP");        draw_monogram(px+78,py+36,c_white,string(party[pm].mp-party[pm].drn)+"/"+string(party[pm].mp));
+            }
         
-        px = 20; py = 124;
-        draw_monogram(px,py,c_white,"12letterName");    draw_monogram(px+96,py,c_white,"Healthy");
-        draw_monogram(px+36,py+12,c_white,"Level");     draw_monogram(px+78,py+12,c_white,"99");        draw_monogram(px+96,py+12,c_white,"ClassName");
-        draw_monogram(px+36,py+24,c_white,"HP");        draw_monogram(px+78,py+24,c_white,"999 / 999");
-        draw_monogram(px+36,py+36,c_white,"MP");        draw_monogram(px+78,py+36,c_white,"999 / 999");
-        
-        px = 20; py = 176;
-        draw_monogram(px,py,c_white,"12letterName");    draw_monogram(px+96,py,c_white,"Healthy");
-        draw_monogram(px+36,py+12,c_white,"Level");     draw_monogram(px+78,py+12,c_white,"99");        draw_monogram(px+96,py+12,c_white,"ClassName");
-        draw_monogram(px+36,py+24,c_white,"HP");        draw_monogram(px+78,py+24,c_white,"999 / 999");
-        draw_monogram(px+36,py+36,c_white,"MP");        draw_monogram(px+78,py+36,c_white,"999 / 999");
+        px = 20; py = 176; pm = 3;
+        if party[3] != -1 {
+            draw_monogram(px,py,c_white,party[pm].name);    draw_monogram(px+96,py,c_white,party[pm].status);
+            draw_monogram(px+36,py+12,c_white,"Level");     draw_monogram(px+78,py+12,c_white,party[pm].lv);        draw_monogram(px+96,py+12,c_white,party[pm].class);
+            draw_monogram(px+36,py+24,c_white,"HP");        draw_monogram(px+78,py+24,c_white,string(party[pm].hp-party[pm].dmg)+"/"+string(party[pm].hp));
+            draw_monogram(px+36,py+36,c_white,"MP");        draw_monogram(px+78,py+36,c_white,string(party[pm].mp-party[pm].drn)+"/"+string(party[pm].mp));
+            }
     #endregion
     
     #region //menu options
