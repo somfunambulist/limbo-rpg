@@ -62,17 +62,37 @@ if menu = 1 {
                 #region //draw items
                     draw_box(s_box,0,25,218,166,menuback);
                     if page_category != 2 {
-                        draw_monogram(17,38,c_white,inventory[0].name);
+                        for(i=0;i<24;i+=1) {
+                            if inventory[i] != -1 {
+                                var _c = 0;
+                                if i % 2 != 0 {
+                                    _c = 102;
+                                }
+                                var _r = floor(i/2);
+                                draw_monogram(17+_c,38+12*_r,c_white,inventory[i].name);
+                                draw_set_halign(fa_right);
+                                var _a = inventory[i].amount; if _a < 10 { _a = "0"+string(_a); }
+                                draw_monogram(107+_c,38+12*_r,c_white,":"+string(_a));
+                                draw_set_halign(fa_left);
+                            }
                         }
+                    }
                     if page_active = 1 {
-                       draw_pointer(9,38,3,c_white);
-                       }
+                        if page_select != -1 {
+                            var _c = 0;
+                            if page_select % 2 != 0 {
+                                _c = 102;
+                            }
+                            var _r = floor(page_select/2);
+                            draw_pointer(9+_c,38+12*_r,3,c_white);
+                        }
+                    }
                 #endregion
                 #region //item description
                     draw_box(s_box,0,192,218,48,menuback);
                     if page_active = 1 {
                         if page_category = 0 {
-                            draw_monogram(47,200,c_white,inventory[0].description);
+                            draw_monogram(47,200,c_white,inventory[page_select].description);
                         }
                     }
                     else {

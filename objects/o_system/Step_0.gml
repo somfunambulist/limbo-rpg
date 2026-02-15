@@ -65,6 +65,59 @@ if menu = 1 {
                     page_active = 0;
                     break;
                 }
+                if keyboard_check_released(vk_left)+keyboard_check_released(vk_right) > 0 {
+                    if page_select % 2 != 0 {
+                        page_select -= 1;
+                    }
+                    else {
+                        if inventory[page_select+1] != -1 {
+                            page_select += 1;
+                        }
+                    }
+                }
+                if keyboard_check_released(vk_down) {
+                    if inventory[page_select+2] != -1 {
+                        page_select += 2;
+                    }
+                    else {
+                        if page_select % 2 != 0 {
+                            page_select = 1;
+                        }
+                        else {
+                            page_select = 0;
+                        }
+                    }
+                }
+                if keyboard_check_released(vk_up) {
+                    if page_select-2 >= 0 {
+                        page_select -= 2;
+                    }
+                    else {
+                        var _n
+                        for(i=0;i<999;i+=1) {
+                            if inventory[i] = -1 {
+                                _n = i-1;
+                                break;
+                            }
+                        }
+                        if _n % 2 != 0 {
+                            if page_select % 2 != 0 {
+                                page_select = _n;
+                            }
+                            else {
+                                page_select = _n-1;
+                            }
+                        }
+                        else {
+                            if page_select % 2 != 0 {
+                                page_select = _n-1;
+                            }
+                            else {
+                                page_select = _n;
+                            }
+                        }
+                    }
+                }
             }
         case "magic" :
         case "equipment" :

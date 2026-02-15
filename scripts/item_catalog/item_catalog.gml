@@ -4,7 +4,7 @@ global.item_potion = {
 }
 global.item_antidote = {
     name : "Antidote",      amount :    2,
-    description :           "Cure Poisoned status effect."
+    description :           "Cure Poisoned status\neffect."
 }
 global.item_hi_potion = {
     name : "Hi-Potion",     amount :    1,
@@ -12,5 +12,5 @@ global.item_hi_potion = {
 }
 global.item_mega_potion = {
     name : "Mega Potion",   amount :    1,
-    description :           "Recover 100 HP per party member."
+    description :           "Recover 100 HP per party\nmember."
 }
