@@ -3,55 +3,7 @@ if menu = 1 {
     #region //display chunk
         switch(menu_page) {
             case "" :
-                draw_box(s_box,0,0,218,240,menuback);
-                var px = 17; var py = 20; var pm = 0;
-                if party[0] != -1 {
-                    draw_monogram(px,py,c_white,party[pm].name);    draw_monogram(px+84,py,c_white,party[pm].status);
-                    var _lv = party[pm].lv; if _lv < 10 { _lv = "0"+string(_lv); }
-                    draw_monogram(px+36,py+12,c_white,"LV");        draw_monogram(px+60,py+12,c_white,_lv);        draw_monogram(px+84,py+12,c_white,party[pm].class);
-                    var _hp = party[pm].hp-party[pm].dmg; if _hp < 100 { if _hp < 10 { _hp = "00"+string(_hp); } else { _hp = "0"+string(_hp); }} else { _hp = string(_hp); }
-                    var _fl = party[pm].hp; if _fl < 100 { if _hp < 10 { _fl = "00"+string(_fl); } else { _fl = "0"+string(_fl); }} else { _fl = string(_fl); }
-                    draw_monogram(px+36,py+24,c_white,"HP");        draw_monogram(px+60,py+24,c_white,_hp+" / "+_fl);
-                    var _mp = party[pm].mp-party[pm].drn; if _mp < 100 { if _mp < 10 { _mp = "00"+string(_mp); } else { _mp = "0"+string(_mp); }} else { _mp = string(_mp); }
-                    _fl = party[pm].mp; if _fl < 100 { if _mp < 10 { _fl = "00"+string(_fl); } else { _fl = "0"+string(_fl); }} else { _fl = string(_fl); }
-                    draw_monogram(px+36,py+36,c_white,"MP");        draw_monogram(px+60,py+36,c_white,_mp+" / "+_fl);
-                    }
-                py = 72; pm = 1;
-                if party[1] != -1 {
-                    draw_monogram(px,py,c_white,party[pm].name);    draw_monogram(px+84,py,c_white,party[pm].status);
-                    var _lv = party[pm].lv; if _lv < 10 { _lv = "0"+string(_lv); }
-                    draw_monogram(px+36,py+12,c_white,"LV");        draw_monogram(px+60,py+12,c_white,_lv);        draw_monogram(px+84,py+12,c_white,party[pm].class);
-                    var _hp = party[pm].hp-party[pm].dmg; if _hp < 100 { if _hp < 10 { _hp = "00"+string(_hp); } else { _hp = "0"+string(_hp); }} else { _hp = string(_hp); }
-                    var _fl = party[pm].hp; if _fl < 100 { if _hp < 10 { _fl = "00"+string(_fl); } else { _fl = "0"+string(_fl); }} else { _fl = string(_fl); }
-                    draw_monogram(px+36,py+24,c_white,"HP");        draw_monogram(px+60,py+24,c_white,_hp+" / "+_fl);
-                    var _mp = party[pm].mp-party[pm].drn; if _mp < 100 { if _mp < 10 { _mp = "00"+string(_mp); } else { _mp = "0"+string(_mp); }} else { _mp = string(_mp); }
-                    _fl = party[pm].mp; if _fl < 100 { if _mp < 10 { _fl = "00"+string(_fl); } else { _fl = "0"+string(_fl); }} else { _fl = string(_fl); }
-                    draw_monogram(px+36,py+36,c_white,"MP");        draw_monogram(px+60,py+36,c_white,_mp+" / "+_fl);
-                    }
-                py = 124; pm = 2;
-                if party[2] != -1 {
-                    draw_monogram(px,py,c_white,party[pm].name);    draw_monogram(px+84,py,c_white,party[pm].status);
-                    var _lv = party[pm].lv; if _lv < 10 { _lv = "0"+string(_lv); }
-                    draw_monogram(px+36,py+12,c_white,"LV");        draw_monogram(px+60,py+12,c_white,_lv);        draw_monogram(px+84,py+12,c_white,party[pm].class);
-                    var _hp = party[pm].hp-party[pm].dmg; if _hp < 100 { if _hp < 10 { _hp = "00"+string(_hp); } else { _hp = "0"+string(_hp); }} else { _hp = string(_hp); }
-                    var _fl = party[pm].hp; if _fl < 100 { if _hp < 10 { _fl = "00"+string(_fl); } else { _fl = "0"+string(_fl); }} else { _fl = string(_fl); }
-                    draw_monogram(px+36,py+24,c_white,"HP");        draw_monogram(px+60,py+24,c_white,_hp+" / "+_fl);
-                    var _mp = party[pm].mp-party[pm].drn; if _mp < 100 { if _mp < 10 { _mp = "00"+string(_mp); } else { _mp = "0"+string(_mp); }} else { _mp = string(_mp); }
-                    _fl = party[pm].mp; if _fl < 100 { if _mp < 10 { _fl = "00"+string(_fl); } else { _fl = "0"+string(_fl); }} else { _fl = string(_fl); }
-                    draw_monogram(px+36,py+36,c_white,"MP");        draw_monogram(px+60,py+36,c_white,_mp+" / "+_fl);
-                    }
-                py = 176; pm = 3;
-                if party[3] != -1 {
-                    draw_monogram(px,py,c_white,party[pm].name);    draw_monogram(px+84,py,c_white,party[pm].status);
-                    var _lv = party[pm].lv; if _lv < 10 { _lv = "0"+string(_lv); }
-                    draw_monogram(px+36,py+12,c_white,"LV");        draw_monogram(px+60,py+12,c_white,_lv);        draw_monogram(px+84,py+12,c_white,party[pm].class);
-                    var _hp = party[pm].hp-party[pm].dmg; if _hp < 100 { if _hp < 10 { _hp = "00"+string(_hp); } else { _hp = "0"+string(_hp); }} else { _hp = string(_hp); }
-                    var _fl = party[pm].hp; if _fl < 100 { if _hp < 10 { _fl = "00"+string(_fl); } else { _fl = "0"+string(_fl); }} else { _fl = string(_fl); }
-                    draw_monogram(px+36,py+24,c_white,"HP");        draw_monogram(px+60,py+24,c_white,_hp+" / "+_fl);
-                    var _mp = party[pm].mp-party[pm].drn; if _mp < 100 { if _mp < 10 { _mp = "00"+string(_mp); } else { _mp = "0"+string(_mp); }} else { _mp = string(_mp); }
-                    _fl = party[pm].mp; if _fl < 100 { if _mp < 10 { _fl = "00"+string(_fl); } else { _fl = "0"+string(_fl); }} else { _fl = string(_fl); }
-                    draw_monogram(px+36,py+36,c_white,"MP");        draw_monogram(px+60,py+36,c_white,_mp+" / "+_fl);
-                    }
+                draw_party();
                 break;
             case "items":
                 #region //options
@@ -61,51 +13,62 @@ if menu = 1 {
                 #endregion
                 #region //draw items
                     draw_box(s_box,0,25,218,166,menuback);
-                    if page_category != 2 {
-                        for(i=0;i<24;i+=1) {
-                            if inventory[i] != -1 {
-                                var _c = 0;
-                                if i % 2 != 0 {
-                                    _c = 102;
+                    if item_control = -1 {
+                        if page_category != 2 {
+                            for(i=0;i<24;i+=1) {
+                                if inventory[i] != -1 {
+                                    var _c = 0;
+                                    if i % 2 != 0 {
+                                        _c = 102;
+                                    }
+                                    var _r = floor(i/2);
+                                    draw_monogram(17+_c,38+12*_r,c_white,inventory[i].name);
+                                    draw_set_halign(fa_right);
+                                    var _a = inventory[i].amount; if _a < 10 { _a = "0"+string(_a); }
+                                    draw_monogram(107+_c,38+12*_r,c_white,":"+string(_a));
+                                    draw_set_halign(fa_left);
                                 }
-                                var _r = floor(i/2);
-                                draw_monogram(17+_c,38+12*_r,c_white,inventory[i].name);
-                                draw_set_halign(fa_right);
-                                var _a = inventory[i].amount; if _a < 10 { _a = "0"+string(_a); }
-                                draw_monogram(107+_c,38+12*_r,c_white,":"+string(_a));
-                                draw_set_halign(fa_left);
                             }
                         }
-                    }
-                    if page_active = 1 {
-                        if page_select != -1 {
-                            var _c = 0;
-                            if page_select % 2 != 0 {
-                                _c = 102;
+                        if page_active = 1 {
+                            if page_select != -1 {
+                                var _c = 0;
+                                if page_select % 2 != 0 {
+                                    _c = 102;
+                                }
+                                var _r = floor(page_select/2);
+                                draw_pointer(9+_c,38+12*_r,3,c_white);
                             }
-                            var _r = floor(page_select/2);
-                            draw_pointer(9+_c,38+12*_r,3,c_white);
                         }
                     }
                 #endregion
                 #region //item description
                     draw_box(s_box,0,192,218,48,menuback);
-                    if page_active = 1 {
-                        if page_category = 0 {
-                            draw_monogram(47,200,c_white,inventory[page_select].description);
+                    if item_control = -1 {
+                        if page_active = 1 {
+                            if page_category = 0 {
+                                draw_monogram(47,200,c_white,inventory[page_select].description);
+                            }
+                        }
+                        else {
+                            switch(page_category) {
+                                case 0:
+                                    draw_monogram(11,200,c_white,"Items and equipment you have\ngathered on your journey.");
+                                    break;
+                                case 1:
+                                    draw_monogram(11,200,c_white,"Organize your inventory.");
+                                    break;
+                                case 2:
+                                    draw_monogram(11,200,c_white,"Important items that you cannot\nthrow away.");
+                                    break;
+                            }
                         }
                     }
-                    else {
-                        switch(page_category) {
-                            case 0:
-                                draw_monogram(11,200,c_white,"Items and equipment you have\ngathered on your journey.");
-                                break;
-                            case 1:
-                                draw_monogram(11,200,c_white,"Organize your inventory.");
-                                break;
-                            case 2:
-                                draw_monogram(11,200,c_white,"Important items that you cannot\nthrow away.");
-                                break;
+                #endregion
+                #region //item control
+                    if item_control != -1 {
+                        if unit_select != -1 {
+                            draw_party();
                         }
                     }
                 #endregion
