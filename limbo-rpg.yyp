@@ -31,6 +31,7 @@
     {"id":{"name":"draw_ux","path":"scripts/draw_ux/draw_ux.yy",},},
     {"id":{"name":"item_catalog","path":"scripts/item_catalog/item_catalog.yy",},},
     {"id":{"name":"s_box","path":"sprites/s_box/s_box.yy",},},
+    {"id":{"name":"s_image","path":"sprites/s_image/s_image.yy",},},
     {"id":{"name":"s_pointer","path":"sprites/s_pointer/s_pointer.yy",},},
   ],
   "resourceType":"GMProject",

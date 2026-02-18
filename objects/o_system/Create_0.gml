@@ -32,16 +32,18 @@ gametime = 0;
     unit_main = 
         {
             name :      "Player",
+            icon : s_image,
             class :     "Lost Child",
             status :    "Healthy",
             lv :    1,      xp :    0,
-            hp :    100,     dmg :  99,
+            hp :    100,    dmg :  99,
             mp :    10,     drn :   0
             
         }
     the_duck = 
         {
             name :      "Pekingente",
+            icon : s_image,
             class :     "Paukant",
             status :    "Healthy",
             lv :    5,      xp :    0,
@@ -52,5 +54,7 @@ gametime = 0;
 
     party[0] = unit_main;
     party[1] = the_duck;
+    party[2] = unit_main;
+    party[3] = the_duck;
 
 #endregion

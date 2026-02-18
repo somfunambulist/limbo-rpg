@@ -35,99 +35,94 @@ if menu = 1 {
             }
             break;
         case "items" :
-            if item_control = -1 {
-                if page_active = 0 {
-                    if keyboard_check_released(vk_right) {
-                        page_select = 0;
-                        if page_category < 2 {
-                            page_category += 1;
-                        }
-                        else {
-                            page_category = 0;
-                        }
+            if page_active = 0 {
+                if keyboard_check_released(vk_right) {
+                    page_select = 0;
+                    if page_category < 2 {
+                        page_category += 1;
                     }
-                    if keyboard_check_released(vk_left) {
-                        page_select = 0;
-                        if page_category > 0 {
-                            page_category -= 1;
-                        }
-                        else {
-                            page_category = 2;
-                        }
-                    }
-                    if keyboard_check_released(vk_space) {
-                        if page_category != 1 {
-                            page_active = 1;
-                        }
+                    else {
+                        page_category = 0;
                     }
                 }
-                else {
-                    if keyboard_check_released(vk_backspace) {
-                        page_active = 0;
-                        break;
+                if keyboard_check_released(vk_left) {
+                    page_select = 0;
+                    if page_category > 0 {
+                        page_category -= 1;
                     }
-                    if keyboard_check_released(vk_space) {
-                        if inventory[page_select] != -1 {
-                            inventory[page_select].use("field");
-                        }
+                    else {
+                        page_category = 2;
                     }
-                    if keyboard_check_released(vk_left)+keyboard_check_released(vk_right) > 0 {
-                        if page_select % 2 != 0 {
-                            page_select -= 1;
-                        }
-                        else {
-                            if inventory[page_select+1] != -1 {
-                                page_select += 1;
-                            }
-                        }
-                    }
-                    if keyboard_check_released(vk_down) {
-                        if inventory[page_select+2] != -1 {
-                            page_select += 2;
-                        }
-                        else {
-                            if page_select % 2 != 0 {
-                                page_select = 1;
-                            }
-                            else {
-                                page_select = 0;
-                            }
-                        }
-                    }
-                    if keyboard_check_released(vk_up) {
-                        if page_select-2 >= 0 {
-                            page_select -= 2;
-                        }
-                        else {
-                            var _n
-                            for(i=0;i<999;i+=1) {
-                                if inventory[i] = -1 {
-                                    _n = i-1;
-                                    break;
-                                }
-                            }
-                            if _n % 2 != 0 {
-                                if page_select % 2 != 0 {
-                                    page_select = _n;
-                                }
-                                else {
-                                    page_select = _n-1;
-                                }
-                            }
-                            else {
-                                if page_select % 2 != 0 {
-                                    page_select = _n-1;
-                                }
-                                else {
-                                    page_select = _n;
-                                }
-                            }
-                        }
+                }
+                if keyboard_check_released(vk_space) {
+                    if page_category != 1 {
+                        page_active = 1;
                     }
                 }
             }
             else {
-                item_control.use("field","step");
+                if keyboard_check_released(vk_backspace) {
+                    page_active = 0;
+                    break;
+                }
+                if keyboard_check_released(vk_space) {
+                    if inventory[page_select] != -1 {
+                        //
+                    }
+                }
+                if keyboard_check_released(vk_left)+keyboard_check_released(vk_right) > 0 {
+                    if page_select % 2 != 0 {
+                        page_select -= 1;
+                    }
+                    else {
+                        if inventory[page_select+1] != -1 {
+                            page_select += 1;
+                        }
+                    }
+                }
+                if keyboard_check_released(vk_down) {
+                    if inventory[page_select+2] != -1 {
+                        page_select += 2;
+                    }
+                    else {
+                        if page_select % 2 != 0 {
+                            page_select = 1;
+                        }
+                        else {
+                            page_select = 0;
+                        }
+                    }
+                }
+                if keyboard_check_released(vk_up) {
+                    if page_select-2 >= 0 {
+                        page_select -= 2;
+                    }
+                    else {
+                        var _n
+                        for(i=0;i<999;i+=1) {
+                            if inventory[i] = -1 {
+                                _n = i-1;
+                                break;
+                            }
+                        }
+                        if _n % 2 != 0 {
+                            if page_select % 2 != 0 {
+                                page_select = _n;
+                            }
+                            else {
+                                page_select = _n-1;
+                            }
+                        }
+                        else {
+                            if page_select % 2 != 0 {
+                                page_select = _n-1;
+                            }
+                            else {
+                                page_select = _n;
+                            }
+                        }
+                    }
+                }
             }
         case "magic" :
         case "equipment" :
