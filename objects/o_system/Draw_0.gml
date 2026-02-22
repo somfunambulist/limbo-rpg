@@ -1,6 +1,6 @@
 var menuback = make_colour_rgb(15, 55, 155);
 if menu = 1 { 
-    #region //display chunk
+    #region DISPLAY CHUNK
         switch(menu_page) {
             case "" :
                 draw_box(s_box,0,0,218,240,menuback);
@@ -61,12 +61,12 @@ if menu = 1 {
                 break;
             case "items":
                 px = 0; py = 0;
-                #region //options
+                #region OPTIONS
                     draw_box(s_box,px,py,218,24,menuback);
                     draw_monogram(px+17,py+8,c_white,"Items      Sort       Key Items");
                     draw_pointer(px+9+page_category*66,py+8,3,c_white);
                 #endregion
-                #region //item description
+                #region ITEM DESCRIPTION
                     px = 0; py = 25;
                     draw_box(s_box,px,py,218,48,menuback);
                     if active_item = -1 {
@@ -94,7 +94,7 @@ if menu = 1 {
                     active_item.use("field","draw");
                 }
                 #endregion
-                #region //draw items
+                #region DRAW ITEMS
                     if hide_items = 0 {
                         px = 0; py = 74;
                         draw_box(s_box,px,py,218,166,menuback);
@@ -133,6 +133,54 @@ if menu = 1 {
             case "facets":
                 break;
             case "party":
+                var _x = 0; var _y = 0;
+                //selector
+                draw_box(s_box,_x,_y,218,55,menuback);
+                draw_monogram(_x+8,_y+8,c_white,"Select party member:");
+                for(i=0;i<4;i+=1) {
+                    if party[i] != -1 {
+                        var _r = floor(i/2);
+                        var _c = 0; if i % 2 != 0 { _c = 1; }
+                        draw_monogram(_x+20+84*_c,_y+22+14*_r,c_white,party[i].name);
+                        if page_select = i {
+                            draw_pointer(_x+12+84*_c,_y+22+14*_r,3,c_white);
+                        }
+                    }
+                }
+                //display
+                _y = 56;
+                draw_box(s_box,_x,_y,218,184,menuback);
+                var _u = party[page_select];
+                #region COLUMN A
+                    draw_sprite(_u.icon,_u.subimg,_x+8,_y+8);
+                    draw_monogram(_x+44,_y+8,c_white,_u.name+"\n"+_u.status+"\n"+_u.class+"\n"+string(_u.lv)+"\n"+string(_u.xp)+"\n"+string(_u.next));
+                    draw_monogram(_x+8,_y+44,c_white,"  LV\n  XP\nNext\n  HP\n  MP");
+                    var _a = _u.hp-_u.dmg; if _a < 10 { _a = "000"+string(_a) } else { if _a < 100 { _a = "00"+string(_a) } else { if _a < 1000 { _a = "0"+string(_a) } else { _a = _string(_a) } } }
+                    var _b = _u.hp; if _b < 10 { _b = "000"+string(_b) } else { if _b < 100 { _b = "00"+string(_b) } else { if _b < 1000 { _b = "0"+string(_b) } else { _b = _string(_b) } } }
+                    draw_monogram(_x+44,_y+80,c_white,_a+" / "+_b);
+                    _a = _u.mp-_u.drn; if _a < 10 { _a = "000"+string(_a) } else { if _a < 100 { _a = "00"+string(_a) } else { if _a < 1000 { _a = "0"+string(_a) } else { _a = _string(_a) } } }
+                    _b = _u.mp; if _b < 10 { _b = "000"+string(_b) } else { if _b < 100 { _b = "00"+string(_b) } else { if _b < 1000 { _b = "0"+string(_b) } else { _b = _string(_b) } } }
+                    draw_monogram(_x+44,_y+92,c_white,_a+" / "+_b);
+                    draw_monogram(_x+8,_y+112,c_white,"Wpn:");
+                    draw_monogram(_x+8,_y+140,c_white,"Arm:");
+                    draw_monogram(_x+8,_y+168,c_white,"Acc:");
+                #endregion
+                #region COLUMN B
+                    draw_monogram(_x+127,_y+8,c_white,"Vigor\nStrength\nWisdom\nIntuition\nAgility");
+                    _a = _u.vig; if _a < 10 { _a = "00"+string(_a) } else { if _a < 100 { _a = "0"+string(_a) } else { _a = string(_a) } }
+                    _b = _a+"\n";
+                    _a = _u.str; if _a < 10 { _a = "00"+string(_a) } else { if _a < 100 { _a = "0"+string(_a) } else { _a = string(_a) } }
+                    _b += _a+"\n";
+                    _a = _u.wis; if _a < 10 { _a = "00"+string(_a) } else { if _a < 100 { _a = "0"+string(_a) } else { _a = string(_a) } }
+                    _b += _a+"\n";
+                    _a = _u.int; if _a < 10 { _a = "00"+string(_a) } else { if _a < 100 { _a = "0"+string(_a) } else { _a = string(_a) } }
+                    _b += _a+"\n";
+                    _a = _u.agi; if _a < 10 { _a = "00"+string(_a) } else { if _a < 100 { _a = "0"+string(_a) } else { _a = string(_a) } }
+                    _b += _a;
+                    draw_monogram(_x+193,_y+8,c_white,_b);
+                    draw_monogram(_x+127,_y+72,c_white,"Damage\nPower\nDefense\nAccuracy\nEvasion\nFinesse\nCharm\nSpeed\nLuck");
+                    
+                #endregion
                 break;
             case "journal":
                 break;
@@ -141,13 +189,13 @@ if menu = 1 {
         }
     #endregion
     
-    #region //menu options
+    #region MENU OPTIONS
         draw_box(s_box,219,0,101,96,menuback);
         draw_monogram(235,8,c_white,"Items\nMagic\nEquipment\nFacets\nParty\nJournal\nConfig");
         draw_pointer(227,8+menu_select*12,3,c_white);
     #endregion
     
-    #region //general info
+    #region GENERAL INFO
         draw_box(s_box,219,97,101,60,menuback);
         draw_monogram(229,105,c_white,"Gold\nTime"); draw_set_halign(fa_right); draw_monogram(313,105,c_white,string(display_gold)+"g"); draw_set_halign(fa_left);
         var hour = floor(gametime/60/60/60); var minute = floor(gametime/60/60-hour*60*60); var second = floor(gametime/60-hour*60*60-minute*60);
@@ -156,7 +204,7 @@ if menu = 1 {
         draw_monogram(229,129,c_white,"Location\nLocation");
     #endregion
     
-    #region //the unused one
+    #region THE UNUSED ONE
     draw_box(s_box,219,158,101,82,menuback);
     #endregion
     

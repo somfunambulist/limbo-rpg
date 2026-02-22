@@ -160,7 +160,7 @@ else {
 }
 
 gametime += 1;
-#region #display updates
+#region DISPLAY UPDATES
     if gametime % 2 != 0 { //slow down display updates
         if display_gold < gold {
             display_gold += 1;

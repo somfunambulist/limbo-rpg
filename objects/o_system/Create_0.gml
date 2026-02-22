@@ -14,7 +14,7 @@ gold = 0;
 display_gold = 0;
 gametime = 0;
 
-#region //inventory
+#region INVENTORY
     for(i=0;i<999;i+=1) {
         inventory[i] = -1;
     }
@@ -25,7 +25,7 @@ gametime = 0;
     inventory[4] = global.item_antidote;
 #endregion
 
-#region //party data
+#region PARTY DATA
 
     party[0] = -1;
     party[1] = -1;
@@ -34,30 +34,27 @@ gametime = 0;
 
     unit_main = 
         {
-            name :      "Player",
-            icon : s_image,
-            class :     "Lost Child",
-            status :    "Healthy",
-            lv :    1,      xp :    0,
-            hp :    100,    dmg :   99,
-            mp :    10,     drn :   0,
-            d_dmg : 0,      d_drn:  0
+            name : "Player", class : "Tourist", status : "Healthy",
+            icon : s_image, subimg : 0,
+            lv : 1, xp : 0, next : 999,
+            hp : 100, dmg : 99, d_dmg : 0, mp : 10, drn : 0, d_drn : 0,
+            vig : 999, str : 99, wis : 9, int : 999, agi : 999,
+            wpn : -1, arm : -1, acc : -1
         }
     the_duck = 
         {
-            name :      "Pekingente",
-            icon : s_image,
-            class :     "Paukant",
-            status :    "Healthy",
-            lv :    5,      xp :    0,
-            hp :    70,     dmg :   0,
-            mp :    18,     drn :   0,
-            d_dmg : 0,      d_drn:  0
+            name : "Pekingente", class : "Paukant", status : "Healthy",
+            icon : s_image, subimg : 0,
+            lv : 1, xp : 0, next : 999,
+            hp : 100, dmg : 99, d_dmg : 0, mp : 10, drn : 0, d_drn : 0,
+            vig : 999, str : 999, wis : 999, int : 999, agi : 999,
+            wpn : -1, arm : -1, acc : -1
         }
+    //possibly consider removing d_ stats and having those be stored in the party array?
 
     party[0] = unit_main;
     party[1] = the_duck;
-    //party[2] = the_duck;
-    //party[3] = the_duck;
+    party[2] = the_duck;
+    party[3] = the_duck;
 
 #endregion
