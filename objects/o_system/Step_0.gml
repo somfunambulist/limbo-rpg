@@ -7,7 +7,7 @@ if menu = 1 {
         case "" :
             if keyboard_check_released(vk_space) {
                 switch(menu_select) {
-                    case 0: menu_page = "items"; break;
+                    case 0: menu_page = "items"; page_active = 1; break;
                     case 1: menu_page = "magic"; break;
                     case 2: menu_page = "equipment"; break;
                     case 3: menu_page = "facets"; break;
@@ -130,12 +130,145 @@ if menu = 1 {
             else {
                 active_item.use("field","step");
             }
+            if keyboard_check_released(vk_backspace) {
+                if back_skip = 0 {
+                    menu_page = "";
+                    page_select = 0;
+                    page_category = 0;
+                    page_active = 0;
+                }
+                else {
+                    back_skip = 0;
+                }
+            }
+            break;
         case "magic" :
+            if keyboard_check_released(vk_backspace) {
+                if back_skip = 0 {
+                    menu_page = "";
+                    page_select = 0;
+                    page_category = 0;
+                    page_active = 0;
+                }
+                else {
+                    back_skip = 0;
+                }
+            }
+            break;
         case "equipment" :
+            if keyboard_check_released(vk_backspace) {
+                if back_skip = 0 {
+                    menu_page = "";
+                    page_select = 0;
+                    page_category = 0;
+                    page_active = 0;
+                }
+                else {
+                    back_skip = 0;
+                }
+            }
+            break;
         case "facets" :
+            if keyboard_check_released(vk_backspace) {
+                if back_skip = 0 {
+                    menu_page = "";
+                    page_select = 0;
+                    page_category = 0;
+                    page_active = 0;
+                }
+                else {
+                    back_skip = 0;
+                }
+            }
+            break;
         case "party" :
+            if page_active = 0 {
+                if keyboard_check_released(vk_left)+keyboard_check_released(vk_right) > 0 {
+                    if page_select = 0 || page_select = 2 {
+                        if party[page_select+1] != -1 {
+                            page_select += 1;
+                        }
+                    }
+                    else {
+                        page_select -= 1;
+                    }
+                }
+                if keyboard_check_released(vk_up)+keyboard_check_released(vk_down) > 0 {
+                    if page_select < 2 {
+                        if party[page_select+2] != -1 {
+                            page_select += 2;
+                        }
+                    }
+                    else {
+                        page_select -= 2;
+                    }
+                }
+                if keyboard_check_released(vk_backspace) {
+                    if back_skip = 0 {
+                        menu_page = "";
+                        page_select = 0;
+                        page_category = 0;
+                        page_active = 0;
+                    }
+                    else {
+                        back_skip = 0;
+                    }
+                }
+                if keyboard_check_released(vk_space) {
+                    page_active = 1;
+                    unit_select = 0;
+                }
+            }
+            else {
+                if keyboard_check_released(vk_down) {
+                    if unit_select < 13 {
+                        unit_select += 1;
+                    }
+                    else {
+                        unit_select = 0;
+                    }
+                }
+                if keyboard_check_released(vk_up) {
+                    if unit_select > 0 {
+                        unit_select -= 1;
+                    }
+                    else {
+                        unit_select = 13;
+                    }
+                }
+                if keyboard_check_released(vk_backspace) {
+                    unit_select = -1;
+                    page_active = 0;
+                    back_skip = 1;
+                }
+            }
+            break;
         case "journal" :
+            if keyboard_check_released(vk_backspace) {
+                if back_skip = 0 {
+                    menu_page = "";
+                    page_select = 0;
+                    page_category = 0;
+                    page_active = 0;
+                }
+                else {
+                    back_skip = 0;
+                }
+            }
+            break;
         case "config" :
+            if keyboard_check_released(vk_backspace) {
+                if back_skip = 0 {
+                    menu_page = "";
+                    page_select = 0;
+                    page_category = 0;
+                    page_active = 0;
+                }
+                else {
+                    back_skip = 0;
+                }
+            }
+            break;
         default :
             if keyboard_check_released(vk_backspace) {
                 if back_skip = 0 {

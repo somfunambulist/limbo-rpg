@@ -26,15 +26,28 @@ function draw_party_select(n=-1) {
             var u = o_system.party[i];
             draw_sprite(u.icon,0,_x+16,_y+10+i*38);
             draw_monogram(_x+52,_y+10+i*38,c_white,u.name+"  "+u.status);
-            var a = u.hp-u.d_dmg;   if a < 10 { a = "00"+string(a) } else { if a < 100 { a = "0"+string(a) } else { a = string(a) }}
-            var b = u.hp;        if b < 10 { b = "00"+string(b) } else { if b < 100 { b = "0"+string(b) } else { b = string(b) }}
-            draw_monogram(_x+52,_y+22+i*38,c_white,"HP  "+a+" / "+b);
-            a = u.mp-u.d_drn;   if a < 10 { a = "00"+string(a) } else { if a < 100 { a = "0"+string(a) } else { a = string(a) }}
-            b = u.mp;        if b < 10 { b = "00"+string(b) } else { if b < 100 { b = "0"+string(b) } else { b = string(b) }}
-            draw_monogram(_x+52,_y+34+i*38,c_white,"MP  "+a+" / "+b);
+            draw_monogram(_x+52,_y+22+i*38,c_white,"HP  "+format_number(u.hp-u.d_dmg,4)+" / "+format_number(u.hp,4));
+            draw_monogram(_x+52,_y+34+i*38,c_white,"MP  "+format_number(u.mp-u.d_drn,4)+" / "+format_number(u.mp,4));
         }
     }
     if n != -1 {
         draw_pointer(_x+8,_y+22+n*38,3,c_white);
     }
+}
+
+function format_number(n,length) {
+    var l = length;
+    var r = "";
+    switch(l) {
+        case 2:
+            if n < 10 { r = "0"+string(n) } else { r = string(n) }
+            break;
+        case 3:
+            if n < 10 { r = "00"+string(n) } else { if n < 100 { r = "0"+string(n) } else { r = string(n) } }
+            break;
+        case 4:
+            if n < 10 { r = "000"+string(n) } else { if n < 100 { r = "00"+string(n) } else { if n < 1000 { r = "0"+string(n) } else { r = string(n) } } }
+            break;
+    }
+    return(r);
 }
