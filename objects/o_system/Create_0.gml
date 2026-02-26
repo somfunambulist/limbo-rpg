@@ -27,34 +27,9 @@ gametime = 0;
 
 #region PARTY DATA
 
-    party[0] = -1;
-    party[1] = -1;
+    party[0] = global.unit_player;
+    party[1] = global.unit_pekingente;
     party[2] = -1;
     party[3] = -1;
-
-    unit_main = 
-        {
-            name : "Player", class : "Tourist", status : "Healthy",
-            icon : s_image, subimg : 0,
-            lv : 1, xp : 0, next : 999,
-            hp : 100, dmg : 99, d_dmg : 0, mp : 10, drn : 0, d_drn : 0,
-            vig : 250, str : 99, wis : 9, int : 250, agi : 250,
-            wpn : -1, arm : -1, acc : -1
-        }
-    the_duck = 
-        {
-            name : "Pekingente", class : "Paukant", status : "Healthy",
-            icon : s_image, subimg : 0,
-            lv : 1, xp : 0, next : 999,
-            hp : 100, dmg : 99, d_dmg : 0, mp : 10, drn : 0, d_drn : 0,
-            vig : 250, str : 250, wis : 250, int : 250, agi : 250,
-            wpn : -1, arm : -1, acc : -1
-        }
-    //possibly consider removing d_ stats and having those be stored in the party array?
-
-    party[0] = unit_main;
-    party[1] = the_duck;
-    //party[2] = the_duck;
-    //party[3] = the_duck;
 
 #endregion

@@ -2,6 +2,7 @@ global.item_potion = {
     name : "Potion",
     amount : 5,
     sprite : s_image,
+    subimg : 0,
     description : "Recover 30 HP.",
     use : function(context="field",event="start") {
         var _c = context+"_"+event;
@@ -55,17 +56,14 @@ global.item_potion = {
                 }
                 break;
             case "field_draw":
-                draw_sprite(sprite,0,10,33);
-                var n = amount; if n < 10 { n = "00"+string(n) } else { if n < 100 { n = "0"+string(n) } else { n = string(n) }}
-                draw_monogram(46,33,c_white,name+" :"+n+"  Heal 25 HP.");
-                draw_monogram(46,33+16,c_white,"Select a party member.");
-                draw_party_select(o_system.confirm);
+                draw_sprite(sprite,0,125,34);
+                draw_monogram(161,34,c_white,name+": "+string(amount)+"\nHeal 30 HP.\nSelect a party member.");
+                draw_pointer(8,36+o_system.confirm*50,3,c_white);
                 if keyboard_check(vk_space) = 1 {
                     if o_system.party[o_system.confirm].dmg < 1 {
-                        draw_sprite(s_x,0,8,96+o_system.confirm*38);
+                        draw_sprite(s_x,0,8,36+o_system.confirm*50);
                     }
                 }
-                o_system.hide_items = 1;
                 break;
         }
     }
@@ -74,6 +72,7 @@ global.item_antidote = {
     name : "Antidote",
     amount : 2,
     sprite : s_image,
+    subimg : 0,
     description : "Cure Poisoned status\neffect.",
     use : function(context,event="") {
         //
@@ -83,6 +82,7 @@ global.item_hi_potion = {
     name : "Hi-Potion",
     amount : 1,
     sprite : s_image,
+    subimg : 0,
     description : "Recover 80 HP.",
     use : function(context,event="") {
         //
@@ -92,6 +92,7 @@ global.item_mega_potion = {
     name : "Mega Potion",
     amount : 1,
     sprite : s_image,
+    subimg : 0,
     description : "Recover 100 HP per party\nmember.",
     use : function(context,event="") {
         //
@@ -101,7 +102,8 @@ global.item_coin_purse = {
     name : "Coin Purse",
     amount : 5,
     sprite : s_image,
-    description: "Contains a small amount of\ngold coins.",
+    subimg : 0,
+    description: "Contains a small amount\nof gold coins.",
     use : function(context="field",event="start") {
         var _c = context+"_"+event;
         switch(_c) {
@@ -133,10 +135,9 @@ global.item_coin_purse = {
                 }
                 break;
             case "field_draw":
-                draw_sprite(sprite,0,10,33);
-                var n = amount; if n < 10 { n = "00"+string(n) } else { if n < 100 { n = "0"+string(n) } else { n = string(n) }}
-                draw_monogram(46,33,c_white,name+" :"+n+"  Receive a\nsmall number of coins.\nUse item?   Yes   No");
-                draw_pointer(146-o_system.confirm*36,57,3,c_white);
+                draw_sprite(sprite,0,125,34);
+                draw_monogram(161,34,c_white,name+": "+string(amount)+"\nReceive a small number\nof coins.\nUse item?   Yes   No");
+                draw_pointer(261-o_system.confirm*36,70,3,c_white);
                 break;
         }
     }

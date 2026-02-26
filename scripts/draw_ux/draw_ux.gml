@@ -1,3 +1,5 @@
+global.smallfont = font_add_sprite(s_smallfont,ord(" "),0,1);
+
 function draw_box(sprite_index,x,y,width,height,color){
     draw_rectangle_color(x+4,y+4,x+width-3,y+height-3,color,color,color,color,false);
     draw_sprite_stretched_ext(sprite_index,1,x,y+1,width,height,make_colour_rgb(25, 30, 60),1);
@@ -11,10 +13,42 @@ function draw_monogram(x,y,color,string){
     draw_text_ext_color(x,y-4,string,12,-1,color,color,color,color,1);
 }
 
+function draw_smallfont(x,y,color,string){
+    var shadow = make_colour_rgb(25, 30, 60);
+    draw_set_font(global.smallfont);
+    draw_text_ext_color(x,y+1,string,12,-1,shadow,shadow,shadow,shadow,1);
+    draw_text_ext_color(x,y,string,12,-1,color,color,color,color,1);
+}
+
 function draw_pointer(x,y,subimg,color){
     var shadow = make_colour_rgb(25, 30, 60);
     draw_sprite_ext(s_pointer,subimg,x,y+1,1,1,0,shadow,1);
     draw_sprite_ext(s_pointer,subimg,x,y,1,1,0,color,1);
+}
+
+function draw_mini_hp(x,y,struct){
+    draw_smallfont(x,y,c_white,format_number(struct.hp-struct.d_dmg,4)+"/"+format_number(struct.hp,4));
+    var _g = make_colour_rgb(65, 205, 115);
+    draw_rectangle_color(x,y+6,x+34,y+6,_g,_g,_g,_g,0);
+    var shadow = make_colour_rgb(25, 30, 60);
+    draw_rectangle_color(x,y+7,x+34,y+7,shadow,shadow,shadow,shadow,0);
+}
+
+function draw_mini_mp(x,y,struct){
+    draw_smallfont(x,y,c_white,format_number(struct.mp-struct.d_drn,4)+"/"+format_number(struct.mp,4));
+    var _g = make_colour_rgb(65, 205, 115);
+    draw_rectangle_color(x,y+6,x+34,y+6,_g,_g,_g,_g,0);
+    var shadow = make_colour_rgb(25, 30, 60);
+    draw_rectangle_color(x,y+7,x+34,y+7,shadow,shadow,shadow,shadow,0);
+}
+
+function draw_unit_select(x,y,struct){
+    draw_set_halign(fa_left);
+    draw_monogram(x,y,c_white,struct.name);
+    draw_sprite(struct.icon,struct.subimg,x,y+12);
+    draw_monogram(x+36,y+12,c_white,"Lv "+format_number(struct.lv,2)+"\nHp\nMp");
+    draw_mini_hp(x+54,y+24,struct);
+    draw_mini_mp(x+54,y+36,struct);
 }
 
 function draw_party_select(n=-1) {

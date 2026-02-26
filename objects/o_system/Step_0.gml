@@ -11,7 +11,7 @@ if menu = 1 {
                     case 1: menu_page = "magic"; break;
                     case 2: menu_page = "equipment"; break;
                     case 3: menu_page = "facets"; break;
-                    case 4: menu_page = "party"; break;
+                    case 4: menu_page = "status"; break;
                     case 5: menu_page = "journal"; break;
                     case 6: menu_page = "config"; break;
                 }
@@ -72,32 +72,17 @@ if menu = 1 {
                             inventory[page_select].use("field","start");
                         }
                     }
-                    if keyboard_check_released(vk_left)+keyboard_check_released(vk_right) > 0 {
-                        if page_select % 2 != 0 {
-                            page_select -= 1;
-                        }
-                        else {
-                            if inventory[page_select+1] != -1 {
-                                page_select += 1;
-                            }
-                        }
-                    }
                     if keyboard_check_released(vk_down) {
-                        if inventory[page_select+2] != -1 {
-                            page_select += 2;
+                        if inventory[page_select+1] != -1 {
+                            page_select += 1;
                         }
                         else {
-                            if page_select % 2 != 0 {
-                                page_select = 1;
-                            }
-                            else {
-                                page_select = 0;
-                            }
+                            page_select = 0;
                         }
                     }
                     if keyboard_check_released(vk_up) {
-                        if page_select-2 >= 0 {
-                            page_select -= 2;
+                        if page_select > 0 {
+                            page_select -= 1;
                         }
                         else {
                             var _n
@@ -107,22 +92,7 @@ if menu = 1 {
                                     break;
                                 }
                             }
-                            if _n % 2 != 0 {
-                                if page_select % 2 != 0 {
-                                    page_select = _n;
-                                }
-                                else {
-                                    page_select = _n-1;
-                                }
-                            }
-                            else {
-                                if page_select % 2 != 0 {
-                                    page_select = _n-1;
-                                }
-                                else {
-                                    page_select = _n;
-                                }
-                            }
+                            page_select = _n;
                         }
                     }
                 }
@@ -181,26 +151,32 @@ if menu = 1 {
                 }
             }
             break;
-        case "party" :
+        case "status" :
             if page_active = 0 {
-                if keyboard_check_released(vk_left)+keyboard_check_released(vk_right) > 0 {
-                    if page_select = 0 || page_select = 2 {
+                if keyboard_check_released(vk_down) > 0 {
+                    if page_select < 3 {
                         if party[page_select+1] != -1 {
                             page_select += 1;
                         }
-                    }
-                    else {
-                        page_select -= 1;
-                    }
-                }
-                if keyboard_check_released(vk_up)+keyboard_check_released(vk_down) > 0 {
-                    if page_select < 2 {
-                        if party[page_select+2] != -1 {
-                            page_select += 2;
+                        else {
+                            page_select = 0;
                         }
                     }
                     else {
-                        page_select -= 2;
+                        page_select = 0;
+                    }
+                }
+                if keyboard_check_released(vk_up) > 0 {
+                    if page_select > 0 {
+                        page_select -= 1;
+                    }
+                    else {
+                        for(i=0;i<4;i+=1) {
+                            if party[i] = -1 {
+                                break;
+                            }
+                        }
+                        page_select = i-1;
                     }
                 }
                 if keyboard_check_released(vk_backspace) {
@@ -221,7 +197,7 @@ if menu = 1 {
             }
             else {
                 if keyboard_check_released(vk_down) {
-                    if unit_select < 13 {
+                    if unit_select < 15 {
                         unit_select += 1;
                     }
                     else {
@@ -233,7 +209,7 @@ if menu = 1 {
                         unit_select -= 1;
                     }
                     else {
-                        unit_select = 13;
+                        unit_select = 15;
                     }
                 }
                 if keyboard_check_released(vk_backspace) {
