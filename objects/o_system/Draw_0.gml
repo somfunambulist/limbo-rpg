@@ -71,8 +71,8 @@ if menu = 1 {
                     if active_item = -1 {
                         if inventory[page_select] != -1 {
                             _i = inventory[page_select];
-                            draw_sprite(_i.sprite,_i.subimg,_x+125,_y+34);
-                            draw_monogram(_x+161,_y+34,c_white,_i.name+": "+string(_i.amount)+"\n"+_i.description);
+                            draw_sprite(_i.icon,_i.iconSub,_x+125,_y+34);
+                            draw_monogram(_x+161,_y+34,c_white,_i.name+": "+string(_i.amount)+"\n"+_i.desc);
                         }
                     }
                     else {
@@ -84,10 +84,16 @@ if menu = 1 {
                 for(i=0;i<9;i+=1) {
                     if inventory[i] != -1 {
                         _i = inventory[i];
-                        draw_monogram(_x+132,_y+104+12*i,c_white,_i.name);
+                        var _c = c_white; if _i.use = -1 { _c = make_colour_rgb(165, 190, 205) }
+                        draw_monogram(_x+132,_y+104+12*i,_c,_i.name);
                         draw_monogram(_x+288,_y+104+12*i,c_white,":"+string(_i.amount));
                         if page_select = i {
                             draw_pointer(_x+124,_y+104+i*12,3,c_white);
+                            if keyboard_check(vk_space) {
+                                if _i.use = -1 {
+                                    draw_sprite(s_x,0,_x+124,_y+104+i*12);
+                                }
+                            }
                         }
                     } 
                 }

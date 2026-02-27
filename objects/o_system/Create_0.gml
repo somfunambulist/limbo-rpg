@@ -18,11 +18,11 @@ gametime = 0;
     for(i=0;i<999;i+=1) {
         inventory[i] = -1;
     }
-    inventory[0] = global.item_coin_purse;
+    inventory[0] = global.item_antidote;
     inventory[1] = global.item_potion;
-    inventory[2] = global.item_hi_potion;
-    inventory[3] = global.item_mega_potion;
-    inventory[4] = global.item_antidote;
+    inventory[2] = global.item_coin_purse;
+    inventory[3] = global.item_hi_potion;
+    inventory[4] = global.item_mega_potion;
 #endregion
 
 #region PARTY DATA

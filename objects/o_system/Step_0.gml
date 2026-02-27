@@ -69,7 +69,9 @@ if menu = 1 {
                     }
                     if keyboard_check_released(vk_space) {
                         if inventory[page_select] != -1 {
-                            inventory[page_select].use("field","start");
+                            if inventory[page_select].use != -1 {
+                                inventory[page_select].use("field","start");
+                            }
                         }
                     }
                     if keyboard_check_released(vk_down) {

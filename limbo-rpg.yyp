@@ -30,6 +30,7 @@
     {"id":{"name":"r_test","path":"rooms/r_test/r_test.yy",},},
     {"id":{"name":"derived_stats","path":"scripts/derived_stats/derived_stats.yy",},},
     {"id":{"name":"draw_ux","path":"scripts/draw_ux/draw_ux.yy",},},
+    {"id":{"name":"equip_constructor","path":"scripts/equip_constructor/equip_constructor.yy",},},
     {"id":{"name":"inventory","path":"scripts/inventory/inventory.yy",},},
     {"id":{"name":"item_catalog","path":"scripts/item_catalog/item_catalog.yy",},},
     {"id":{"name":"unit_catalog","path":"scripts/unit_catalog/unit_catalog.yy",},},
