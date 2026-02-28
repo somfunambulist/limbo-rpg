@@ -9,7 +9,7 @@ if menu = 1 {
                 switch(menu_select) {
                     case 0: menu_page = "items"; page_active = 1; break;
                     case 1: menu_page = "magic"; break;
-                    case 2: menu_page = "equipment"; break;
+                    case 2: menu_page = "equipment"; unit_select = 0; break;
                     case 3: menu_page = "facets"; break;
                     case 4: menu_page = "status"; break;
                     case 5: menu_page = "journal"; break;
@@ -128,16 +128,153 @@ if menu = 1 {
             }
             break;
         case "equipment" :
-            if keyboard_check_released(vk_backspace) {
-                if back_skip = 0 {
-                    menu_page = "";
-                    page_select = 0;
-                    page_category = 0;
-                    page_active = 0;
-                }
-                else {
-                    back_skip = 0;
-                }
+            switch(page_active) {
+                case 0:
+                    if keyboard_check_released(vk_backspace) {
+                        if back_skip = 0 {
+                            menu_page = "";
+                            page_select = 0;
+                            page_category = 0;
+                            page_active = 0;
+                            unit_select = -1;
+                        }
+                        else {
+                            back_skip = 0;
+                        }
+                    }
+                    if keyboard_check_released(vk_space) {
+                        page_active = 1;
+                    }
+                    if keyboard_check_released(vk_down) {
+                        if unit_select < 3 {
+                            if party[unit_select+1] != -1 {
+                                unit_select += 1;
+                            }
+                            else {
+                                unit_select = 0;
+                            }
+                        }
+                    }
+                    if keyboard_check_released(vk_up) {
+                        if unit_select > 0 {
+                            unit_select -= 1;
+                        }
+                        else {
+                            for(i=3;i>0;i-=1) {
+                                if party[i] != -1 {
+                                    unit_select = i;
+                                    break;
+                                }
+                            }
+                        }
+                    }
+                    break;
+                case 1:
+                    if keyboard_check_released(vk_backspace) {
+                        if back_skip = 0 {
+                            page_active = 0;
+                        }
+                        else {
+                            back_skip = 0;
+                        }
+                    }
+                    if keyboard_check_released(vk_down) {
+                        if page_category < 2 {
+                            page_category += 1;
+                        }
+                        else {
+                            page_category = 0;
+                        }
+                    }
+                    if keyboard_check_released(vk_up) {
+                        if page_category > 0 {
+                            page_category -= 1;
+                        }
+                        else {
+                            page_category = 2;
+                        }
+                    }
+                    if keyboard_check_released(vk_space) {
+                        page_active = 2;
+                    }
+                    if keyboard_check_released(vk_right) {
+                        if unit_select < 3 {
+                            if party[unit_select+1] != -1 {
+                                unit_select += 1;
+                            }
+                            else {
+                                unit_select = 0;
+                            }
+                        }
+                    }
+                    if keyboard_check_released(vk_left) {
+                        if unit_select > 0 {
+                            unit_select -= 1;
+                        }
+                        else {
+                            for(i=3;i>0;i-=1) {
+                                if party[i] != -1 {
+                                    unit_select = i;
+                                    break;
+                                }
+                            }
+                        }
+                    }
+                    break;
+                case 2:
+                    if keyboard_check_released(vk_backspace) {
+                        page_active = 1;
+                        page_select = 0;
+                    }
+                    switch(page_category) {
+                        case 0:
+                            if keyboard_check_released(vk_down) {
+                                var _list = ds_list_create();
+                                for(i=0;i<999;i+=1) {
+                                    if inventory[i] != -1 {
+                                        if inventory[i].equip != -1 {
+                                            if inventory[i].equip.type = party[unit_select].wpn_typ {
+                                                ds_list_add(_list,inventory[i]);
+                                            }
+                                        }
+                                    }
+                                    else {
+                                        i = 9999;
+                                    }
+                                }
+                                if page_select < ds_list_size(_list)-1 {
+                                    page_select += 1;
+                                }
+                                else {
+                                    page_select = 0;
+                                }
+                                ds_list_destroy(_list);
+                            }
+                            if keyboard_check_released(vk_up) {
+                                if page_select > 0 {
+                                    page_select -= 1;
+                                }
+                                else {
+                                    var _list = ds_list_create();
+                                    for(i=0;i<999;i+=1) {
+                                        if inventory[i] != -1 {
+                                            if inventory[i].equip != -1 {
+                                                if inventory[i].equip.type = party[unit_select].wpn_typ {
+                                                    ds_list_add(_list,inventory[i]);
+                                                }
+                                            }
+                                        }
+                                        else {
+                                            i = 9999;
+                                        }
+                                    }
+                                    page_select = max(ds_list_size(_list)-1,0);
+                                    ds_list_destroy(_list);
+                                }
+                            }
+                            break;
+                    }
+                    break;
             }
             break;
         case "facets" :

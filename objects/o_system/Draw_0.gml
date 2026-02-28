@@ -21,6 +21,29 @@ if menu = 1 {
                         break;
                 }
                 break;
+            case "equipment" :
+                switch(page_active) {
+                    case 0:
+                        draw_monogram(_x+16,_y+8,c_white,"Select party member.");
+                        break;
+                    case 1:
+                        draw_monogram(_x+16,_y+8,c_white,"Select equip slot.");
+                        break;
+                    case 2:
+                        switch(page_category) {
+                            case 0:
+                                draw_monogram(_x+16,_y+8,c_white,"Select weapon.");
+                                break;
+                            case 1:
+                                draw_monogram(_x+16,_y+8,c_white,"Select armor.");
+                                break;
+                            case 2:
+                                draw_monogram(_x+16,_y+8,c_white,"Select accessory.");
+                                break;
+                        }
+                        break;
+                }
+                break;
             case "status" :
                 draw_monogram(_x+16,_y+8,c_white,"Press Select to read glossary.");
                 draw_monogram(_x+16,_y+8,make_colour_rgb(65, 215, 215),"      Select");
@@ -101,16 +124,219 @@ if menu = 1 {
             case "magic":
                 break;
             case "equipment":
-                //unit info
-                draw_box(s_box,_x,_y+25,320,60,menuback);
-                draw_unit_select(_x+8,_y+33,party[0]);
-                draw_monogram(_x+109,_y+33,c_white,"Wpn");
-                draw_monogram(_x+109,_y+51,c_white,"Arm");
-                draw_monogram(_x+109,_y+69,c_white,"Acc");
-                //list view
-                draw_box(s_box,_x,_y+86,139,154,menuback);
-                //item view
-                draw_box(s_box,_x+140,_y+86,180,154,menuback);
+                if page_active = 0 {
+                    draw_box(s_box,_x+0,_y+25,218,215,menuback);
+                    for(i=0;i<4;i+=1) {
+                        if party[i] != -1 {
+                            _u = party[i];
+                            draw_unit_select(_x+16,_y+36+i*50,_u);
+                            draw_monogram(_x+118,_y+36+i*50,c_white,_u.class+"\n"+_u.status+"\nExp\nNxt");
+                            draw_set_halign(fa_right);
+                            draw_monogram(_x+208,_y+60+i*50,c_white,string(_u.xp)+"\n"+string(_u.next));
+                            draw_set_halign(fa_left);
+                        }
+                    }
+                    draw_pointer(_x+8,_y+36+unit_select*50,3,c_white);
+                }
+                else {
+                    //unit info
+                    draw_box(s_box,_x,_y+25,320,60,menuback);
+                    draw_unit_select(_x+8,_y+33,party[unit_select]);
+                    if page_active = 1 {
+                        draw_monogram(_x+109,_y+33,c_white,"Wpn");
+                        draw_monogram(_x+109,_y+51,c_white,"Arm");
+                        draw_monogram(_x+109,_y+69,c_white,"Acc"); 
+                        draw_pointer(_x+101,_y+33+page_category*18,3,c_white);
+                    }
+                    else {
+                        switch(page_category) {
+                            case 0:
+                                draw_monogram(_x+109,_y+33,c_white,"Wpn");
+                                break;
+                            case 1:
+                                draw_monogram(_x+109,_y+33,c_white,"Arm");
+                                break;
+                            case 2:
+                                draw_monogram(_x+109,_y+33,c_white,"Acc");
+                                break;
+                        }
+                        draw_pointer(_x+101,_y+33,0,c_white);
+                    }
+                    //list view
+                    draw_box(s_box,_x,_y+86,139,154,menuback);
+                    //item view
+                    draw_box(s_box,_x+140,_y+86,180,154,menuback);
+                    //filter suff
+                    switch(page_category) {
+                        case 0:
+                            draw_monogram(_x+16,_y+97,c_white,"Weapons");
+                            var _t = party[unit_select].wpn_typ;
+                            var _list = ds_list_create();
+                            for(i=0;i<999;i+=1) {
+                                if inventory[i] != -1 {
+                                    if inventory[i].equip != -1 {
+                                        if inventory[i].equip.type = _t {
+                                            ds_list_add(_list,inventory[i]);
+                                        }
+                                    }
+                                }
+                                else {
+                                    i = 9999;
+                                }
+                            }
+                            if ds_list_size(_list) > 0 {
+                                for(i=0;i<min(10,ds_list_size(_list));i+=1) {
+                                    draw_monogram(_x+16,_y+111+12*i,c_white,ds_list_find_value(_list,i).name);
+                                    draw_monogram(_x+108,_y+111+12*i,c_white,":"+string(ds_list_find_value(_list,i).amount));
+                                }
+                                if page_active = 2 {
+                                    var _e = ds_list_find_value(_list,page_select);
+                                    draw_sprite(_e.icon,_e.iconSub,_x+148,_y+94);
+                                    draw_monogram(_x+184,_y+94,c_white,"Weapon\n"+_e.name);
+                                    draw_monogram(_x+148,_y+130,c_white,_e.desc);
+                                    //facets
+                                    var _shadow = make_colour_rgb(25, 30, 60);
+                                    if _e.equip.facets > 0 {
+                                        for(i=0;i<_e.equip.facets;i+=1) {
+                                            draw_sprite_ext(s_facet_slot,0,_x+184+9*i,_y+119,1,1,0,_shadow,1);
+                                            if _e.equip.pairs > 0 {
+                                                if _e.equip.pairs*2 > i && i % 2 != 0 {
+                                                    draw_rectangle_color(_x+190+9*i-9,_y+121,_x+193+9*i-9,_y+123,_shadow,_shadow,_shadow,_shadow,0);
+                                                }
+                                            }
+                                            draw_sprite_ext(s_facet_slot,0,_x+184+9*i,_y+118,1,1,0,c_white,1);
+                                            if _e.equip.pairs > 0 {
+                                                if _e.equip.pairs*2 > i && i % 2 != 0 {
+                                                    draw_rectangle_color(_x+190+9*i-9,_y+120,_x+193+9*i-9,_y+122,c_white,c_white,c_white,c_white,0);
+                                                }
+                                            }
+                                        }
+                                    }
+                                    //stats
+                                    var _c = c_white;
+                                    draw_monogram(_x+148,_y+180,c_white,"Attack");
+                                    draw_smallfont(_x+196,_y+182,c_white,":"+string(get_attack(party[unit_select])));
+                                    draw_sprite_ext(s_small_arrow,0,_x+212,_y+182,1,1,0,_shadow,1);
+                                    draw_sprite_ext(s_small_arrow,0,_x+212,_y+183,1,1,0,c_white,1);
+                                    _c = c_white;
+                                    if get_attack(party[unit_select],_e.equip) > get_attack(party[unit_select]) {
+                                        _c = make_colour_rgb(65, 205, 115);
+                                    }
+                                    if get_attack(party[unit_select],_e.equip) < get_attack(party[unit_select]) {
+                                        _c = make_colour_rgb(215, 45, 45);
+                                    }
+                                    draw_smallfont(_x+217,_y+182,_c,string(get_attack(party[unit_select],_e.equip)));
+                                    draw_monogram(_x+148,_y+180+11,c_white,"Power");
+                                    draw_smallfont(_x+196,_y+182+11,c_white,":"+string(get_power(party[unit_select])));
+                                    draw_sprite_ext(s_small_arrow,0,_x+212,_y+182+11,1,1,0,_shadow,1);
+                                    draw_sprite_ext(s_small_arrow,0,_x+212,_y+183+11,1,1,0,c_white,1);
+                                    _c = c_white;
+                                    if get_power(party[unit_select],_e.equip) > get_power(party[unit_select]) {
+                                        _c = make_colour_rgb(65, 205, 115);
+                                    }
+                                    if get_power(party[unit_select],_e.equip) < get_power(party[unit_select]) {
+                                        _c = make_colour_rgb(215, 45, 45);
+                                    }
+                                    draw_smallfont(_x+217,_y+182+11,_c,string(get_power(party[unit_select],_e.equip)));
+                                    draw_monogram(_x+148,_y+180+22,c_white,"Defense");
+                                    draw_smallfont(_x+196,_y+182+22,c_white,":"+string(get_defense(party[unit_select])));
+                                    draw_sprite_ext(s_small_arrow,0,_x+212,_y+182+22,1,1,0,_shadow,1);
+                                    draw_sprite_ext(s_small_arrow,0,_x+212,_y+183+22,1,1,0,c_white,1);
+                                    _c = c_white;
+                                    if get_defense(party[unit_select],_e.equip) > get_defense(party[unit_select]) {
+                                        _c = make_colour_rgb(65, 205, 115);
+                                    }
+                                    if get_defense(party[unit_select],_e.equip) < get_defense(party[unit_select]) {
+                                        _c = make_colour_rgb(215, 45, 45);
+                                    }
+                                    draw_smallfont(_x+217,_y+182+22,_c,string(get_defense(party[unit_select],_e.equip)));
+                                    draw_monogram(_x+148,_y+180+33,c_white,"Accuracy");
+                                    draw_smallfont(_x+196,_y+182+33,c_white,":"+string(get_accuracy(party[unit_select])));
+                                    draw_sprite_ext(s_small_arrow,0,_x+212,_y+182+33,1,1,0,_shadow,1);
+                                    draw_sprite_ext(s_small_arrow,0,_x+212,_y+183+33,1,1,0,c_white,1);
+                                    _c = c_white;
+                                    if get_accuracy(party[unit_select],_e.equip) > get_accuracy(party[unit_select]) {
+                                        _c = make_colour_rgb(65, 205, 115);
+                                    }
+                                    if get_accuracy(party[unit_select],_e.equip) < get_accuracy(party[unit_select]) {
+                                        _c = make_colour_rgb(215, 45, 45);
+                                    }
+                                    draw_smallfont(_x+217,_y+182+33,_c,string(get_accuracy(party[unit_select],_e.equip)));
+                                    draw_monogram(_x+148,_y+180+44,c_white,"Evasion");
+                                    draw_smallfont(_x+196,_y+182+44,c_white,":"+string(get_evasion(party[unit_select])));
+                                    draw_sprite_ext(s_small_arrow,0,_x+212,_y+182+44,1,1,0,_shadow,1);
+                                    draw_sprite_ext(s_small_arrow,0,_x+212,_y+183+44,1,1,0,c_white,1);
+                                    _c = c_white;
+                                    if get_evasion(party[unit_select],_e.equip) > get_evasion(party[unit_select]) {
+                                        _c = make_colour_rgb(65, 205, 115);
+                                    }
+                                    if get_evasion(party[unit_select],_e.equip) < get_evasion(party[unit_select]) {
+                                        _c = make_colour_rgb(215, 45, 45);
+                                    }
+                                    draw_smallfont(_x+217,_y+182+44,_c,string(get_evasion(party[unit_select],_e.equip)));
+                                    draw_monogram(_x+232,_y+180,c_white,"Finesse");
+                                    draw_smallfont(_x+280,_y+182,c_white,":"+string(get_finesse(party[unit_select])));
+                                    draw_sprite_ext(s_small_arrow,0,_x+296,_y+182,1,1,0,_shadow,1);
+                                    draw_sprite_ext(s_small_arrow,0,_x+296,_y+183,1,1,0,c_white,1);
+                                    _c = c_white;
+                                    if get_finesse(party[unit_select],_e.equip) > get_finesse(party[unit_select]) {
+                                        _c = make_colour_rgb(65, 205, 115);
+                                    }
+                                    if get_finesse(party[unit_select],_e.equip) < get_finesse(party[unit_select]) {
+                                        _c = make_colour_rgb(215, 45, 45);
+                                    }
+                                    draw_smallfont(_x+301,_y+182,_c,string(get_finesse(party[unit_select],_e.equip)));
+                                    draw_monogram(_x+232,_y+180+11,c_white,"Charm");
+                                    draw_smallfont(_x+280,_y+182+11,c_white,":"+string(get_charm(party[unit_select])));
+                                    draw_sprite_ext(s_small_arrow,0,_x+296,_y+182+11,1,1,0,_shadow,1);
+                                    draw_sprite_ext(s_small_arrow,0,_x+296,_y+183+11,1,1,0,c_white,1);
+                                    _c = c_white;
+                                    if get_charm(party[unit_select],_e.equip) > get_charm(party[unit_select]) {
+                                        _c = make_colour_rgb(65, 205, 115);
+                                    }
+                                    if get_charm(party[unit_select],_e.equip) < get_charm(party[unit_select]) {
+                                        _c = make_colour_rgb(215, 45, 45);
+                                    }
+                                    draw_smallfont(_x+301,_y+182+11,_c,string(get_charm(party[unit_select],_e.equip)));
+                                    draw_monogram(_x+232,_y+180+22,c_white,"Speed");
+                                    draw_smallfont(_x+280,_y+182+22,c_white,":"+string(get_speed(party[unit_select])));
+                                    draw_sprite_ext(s_small_arrow,0,_x+296,_y+182+22,1,1,0,_shadow,1);
+                                    draw_sprite_ext(s_small_arrow,0,_x+296,_y+183+22,1,1,0,c_white,1);
+                                    _c = c_white;
+                                    if get_speed(party[unit_select],_e.equip) > get_speed(party[unit_select]) {
+                                        _c = make_colour_rgb(65, 205, 115);
+                                    }
+                                    if get_speed(party[unit_select],_e.equip) < get_speed(party[unit_select]) {
+                                        _c = make_colour_rgb(215, 45, 45);
+                                    }
+                                    draw_smallfont(_x+301,_y+182+22,_c,string(get_speed(party[unit_select],_e.equip)));
+                                    draw_monogram(_x+232,_y+180+33,c_white,"Luck");
+                                    draw_smallfont(_x+280,_y+182+33,c_white,":"+string(get_luck(party[unit_select])));
+                                    draw_sprite_ext(s_small_arrow,0,_x+296,_y+182+33,1,1,0,_shadow,1);
+                                    draw_sprite_ext(s_small_arrow,0,_x+296,_y+183+33,1,1,0,c_white,1);
+                                    _c = c_white;
+                                    if get_luck(party[unit_select],_e.equip) > get_luck(party[unit_select]) {
+                                        _c = make_colour_rgb(65, 205, 115);
+                                    }
+                                    if get_luck(party[unit_select],_e.equip) < get_luck(party[unit_select]) {
+                                        _c = make_colour_rgb(215, 45, 45);
+                                    }
+                                    draw_smallfont(_x+301,_y+182+33,_c,string(get_luck(party[unit_select],_e.equip)));
+                                }
+                            }
+                            ds_list_destroy(_list);
+                            if page_active = 2 {
+                                draw_pointer(_x+8,_y+111+12*page_select,3,c_white);
+                            }
+                            break;
+                        case 1:
+                            draw_monogram(_x+16,_y+97,c_white,"Armor");
+                            break;
+                        case 2:
+                            draw_monogram(_x+16,_y+97,c_white,"Accessories");
+                            break;
+                    }
+                }
                 break;
             case "facets":
                 break;
@@ -212,7 +438,7 @@ if menu = 1 {
     #endregion
     
     #region MENU OPTIONS
-        if menu_page = "" {
+        if menu_page = "" || ( menu_page = "equipment" && page_active = 0 ) {
             draw_box(s_box,_x+219,_y+0,101,96,menuback);
             draw_monogram(_x+235,_y+8,c_white,"Items\nMagic\nEquipment\nFacets\nStatus\nJournal\nConfig");
             var _s = 3; if menu_page != "" { _s = 1 }
@@ -225,7 +451,7 @@ if menu = 1 {
     #endregion
     
     #region GENERAL INFO
-        if menu_page = "" {
+        if menu_page = "" || ( menu_page = "equipment" && page_active = 0 ) {
             draw_box(s_box,219,97,_x+101,_y+60,menuback);
             draw_monogram(_x+229,_y+105,c_white,"Gold\nTime"); draw_set_halign(fa_right); draw_monogram(_x+313,_y+105,c_white,string(display_gold)+"g"); draw_set_halign(fa_left);
             var hour = floor(gametime/60/60/60); var minute = floor(gametime/60/60-hour*60*60); var second = floor(gametime/60-hour*60*60-minute*60);
@@ -235,7 +461,7 @@ if menu = 1 {
     #endregion
     
     #region THE UNUSED ONE
-        if menu_page = "" {
+        if menu_page = "" || ( menu_page = "equipment" && page_active = 0 ) {
             draw_box(s_box,219,158,_x+101,_y+82,menuback);
         }
     #endregion

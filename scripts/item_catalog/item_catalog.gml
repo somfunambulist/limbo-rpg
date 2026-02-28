@@ -9,6 +9,9 @@ function itemResult() constructor {
 }
 
 function equipResult() constructor {
+    type        = "";
+    facets      = 0;
+    pairs       = 0;
     add_vig     = 0;
     add_str     = 0;
     add_wis     = 0;
@@ -18,6 +21,21 @@ function equipResult() constructor {
 
 function equipBuilder() constructor {
     result = new equipResult();
+    
+    type = function(arg) {
+        result.type = arg;
+        return self;
+    }
+    
+    facets = function(arg) {
+        result.facets = arg;
+        return self;
+    }
+    
+    pairs = function(arg) {
+        result.pairs = arg;
+        return self;
+    }
     
     add_vig = function(arg) {
         result.add_vig = arg;
@@ -237,6 +255,41 @@ global.item_short_sword = new itemBuilder()
     .name("Short Sword")
     .desc("A short but expertly\ncrafted blade.")
     .amount(1)
+    .equip(
+     new equipBuilder()
+        .type("sword")
+        .facets(3)
+        .pairs(1)
+        .add_str(3)
+        .build()
+    )
+    .build();
+
+global.item_short_swordb = new itemBuilder()
+    .name("Short Sword B")
+    .desc("A short but expertly\ncrafted blade.")
+    .amount(1)
+    .equip(
+     new equipBuilder()
+        .type("sword")
+        .facets(2)
+        .add_str(30)
+        .build()
+    )
+    .build();
+
+global.item_short_swordc = new itemBuilder()
+    .name("Short Sword C")
+    .desc("A short but expertly\ncrafted blade.")
+    .amount(1)
+    .equip(
+     new equipBuilder()
+        .type("sword")
+        .facets(9)
+        .pairs(3)
+        .add_str(-3)
+        .build()
+    )
     .build();
 
 global.item_rapier = new itemBuilder()
@@ -245,8 +298,39 @@ global.item_rapier = new itemBuilder()
     .amount(2)
     .equip(
      new equipBuilder()
+        .type("rapier")
+        .facets(2)
         .add_str(2)
-        .build();
+        .add_agi(2)
+        .build()
+    )
+    .build();
+
+global.item_rapierb = new itemBuilder()
+    .name("Rapier B")
+    .desc("A light, thin blade for\nquick thrusts.")
+    .amount(2)
+    .equip(
+     new equipBuilder()
+        .type("rapier")
+        .add_str(4)
+        .add_agi(3)
+        .build()
+    )
+    .build();
+
+global.item_rapierc = new itemBuilder()
+    .name("Rapier C")
+    .desc("A light, thin blade for\nquick thrusts.")
+    .amount(2)
+    .equip(
+     new equipBuilder()
+        .type("rapier")
+        .facets(4)
+        .pairs(2)
+        .add_str(-1)
+        .add_agi(10)
+        .build()
     )
     .build();
 
