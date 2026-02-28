@@ -348,14 +348,27 @@ global.item_pyjamas = new itemBuilder()
 
 global.item_cloak = new itemBuilder()
     .name("Cloak")
-    .desc("Thick,brown wool. Waxed to\nkeep the weather out.")
+    .desc("Thick, brown wool. Waxed\nto keep the weather out.")
     .amount(3)
     .equip(
      new equipBuilder()
         .type("arm")
         .facets(2)
-        .add_agi(-1)
+        .add_agi(1)
         .add_ins(1)
+        .build()
+    )
+    .build();
+
+global.item_ruby_ring = new itemBuilder()
+    .name("Ruby Ring")
+    .desc("A gold ring set with a\nbeautifully cut ruby.")
+    .amount(1)
+    .equip(
+     new equipBuilder()
+        .type("acc")
+        .add_wis(8)
+        .add_ins(4)
         .build()
     )
     .build();

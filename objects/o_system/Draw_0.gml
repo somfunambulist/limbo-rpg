@@ -104,7 +104,7 @@ if menu = 1 {
                 }
                 //list display
                 draw_box(s_box,_x+116,_y+88,204,152,menuback);
-                for(i=0;i<9;i+=1) {
+                for(i=0;i<10;i+=1) {
                     if inventory[i] != -1 {
                         _i = inventory[i];
                         var _c = c_white; if _i.use = -1 { _c = make_colour_rgb(165, 190, 205) }
@@ -360,14 +360,27 @@ if menu = 1 {
                     "\n Hp "+format_number(_u.hp-_u.dmg,4)+" / "+format_number(_u.hp,4)+
                     "\n Mp "+format_number(_u.mp-_u.drn,4)+" / "+format_number(_u.mp,4));
                 //equipment
-                draw_monogram(_x+126,_y+138,c_white,"Weapon");
-                draw_monogram(_x+126,_y+174,c_white,"Armor");
-                draw_monogram(_x+126,_y+210,c_white,"Accessory");
+                draw_monogram(_x+126,_y+138,make_colour_rgb(65, 215, 215),"Weapon");
+                if party[page_select].wpn != -1 {
+                    draw_monogram(_x+126,_y+150,c_white,party[page_select].wpn.name);
+                    draw_facets(_x+126,_y+162,party[page_select].wpn.equip);
+                }
+                draw_monogram(_x+126,_y+174,make_colour_rgb(65, 215, 215),"Armor");
+                if party[page_select].arm != -1 {
+                    draw_monogram(_x+126,_y+186,c_white,party[page_select].arm.name);
+                    draw_facets(_x+126,_y+198,party[page_select].arm.equip);
+                }
+                draw_monogram(_x+126,_y+210,make_colour_rgb(65, 215, 215),"Accessory");
+                if party[page_select].acc != -1 {
+                    draw_monogram(_x+126,_y+222,c_white,party[page_select].acc.name);
+                }
                 //base stats
                 draw_monogram(_x+232,_y+36,c_white,"BASE STATS\nVigor\nStrength\nWisdom\nInstinct\nAgility");
+                draw_monogram(_x+232,_y+36,make_colour_rgb(65, 215, 215),"BASE STATS");
                 draw_monogram(_x+292,_y+48,c_white,string(_u.vig)+"\n"+string(_u.str)+"\n"+string(_u.wis)+"\n"+string(_u.ins)+"\n"+string(_u.agi));
                 //derived stats
                 draw_monogram(_x+232,_y+114,c_white,"DERIVED STATS\nAttack\nPower\nDefense\nAccuracy\nEvasion\nFinesse\nCharm\nSpeed\nLuck");
+                draw_monogram(_x+232,_y+114,make_colour_rgb(65, 215, 215),"DERIVED STATS");
                 draw_monogram(_x+292,_y+126,c_white,string(get_attack(_u))+"\n"+string(get_power(_u))+"\n"+string(get_defense(_u))+"\n"+
                     string(get_accuracy(_u))+"\n"+string(get_evasion(_u))+"\n"+string(get_finesse(_u))+"\n"+string(get_charm(_u))+"\n"+
                     string(get_speed(_u))+"\n"+string(get_luck(_u)));

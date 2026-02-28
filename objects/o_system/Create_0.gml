@@ -18,17 +18,16 @@ gametime = 0;
     for(i=0;i<999;i+=1) {
         inventory[i] = -1;
     }
-    inventory[0] = global.item_antidote;
-    inventory[1] = global.item_potion;
-    inventory[2] = global.item_coin_purse;
-    inventory[3] = global.item_short_sword;
-    inventory[4] = global.item_rapierb;
-    inventory[5] = global.item_short_swordc;
-    inventory[6] = global.item_rapier;
-    inventory[7] = global.item_short_swordb;
-    inventory[8] = global.item_rapierc;
-    inventory[9] = global.item_cloak;
-    inventory[10] = global.item_pyjamas;
+    inventory[0] = global.item_potion;
+    inventory[1] = global.item_coin_purse;
+    inventory[2] = global.item_short_sword;
+    inventory[3] = global.item_rapierb;
+    inventory[4] = global.item_short_swordc;
+    inventory[5] = global.item_rapier;
+    inventory[6] = global.item_short_swordb;
+    inventory[7] = global.item_cloak;
+    inventory[8] = global.item_pyjamas;
+    inventory[9] = global.item_ruby_ring;
 
 #region PARTY DATA
 
