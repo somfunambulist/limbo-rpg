@@ -226,54 +226,62 @@ if menu = 1 {
                         page_active = 1;
                         page_select = 0;
                     }
+                    //filter stuff
+                    var _list,_curr;
                     switch(page_category) {
                         case 0:
-                            if keyboard_check_released(vk_down) {
-                                var _list = ds_list_create();
-                                for(i=0;i<999;i+=1) {
-                                    if inventory[i] != -1 {
-                                        if inventory[i].equip != -1 {
-                                            if inventory[i].equip.type = party[unit_select].wpn_typ {
-                                                ds_list_add(_list,inventory[i]);
-                                            }
-                                        }
-                                    }
-                                    else {
-                                        i = 9999;
-                                    }
-                                }
-                                if page_select < ds_list_size(_list)-1 {
-                                    page_select += 1;
-                                }
-                                else {
-                                    page_select = 0;
-                                }
-                                ds_list_destroy(_list);
-                            }
-                            if keyboard_check_released(vk_up) {
-                                if page_select > 0 {
-                                    page_select -= 1;
-                                }
-                                else {
-                                    var _list = ds_list_create();
-                                    for(i=0;i<999;i+=1) {
-                                        if inventory[i] != -1 {
-                                            if inventory[i].equip != -1 {
-                                                if inventory[i].equip.type = party[unit_select].wpn_typ {
-                                                    ds_list_add(_list,inventory[i]);
-                                                }
-                                            }
-                                        }
-                                        else {
-                                            i = 9999;
-                                        }
-                                    }
-                                    page_select = max(ds_list_size(_list)-1,0);
-                                    ds_list_destroy(_list);
-                                }
-                            }
+                            _list = filter_weapons(1);
+                            _curr = party[unit_select].wpn;
+                            break;
+                        case 1:
+                            _list = filter_armor(1);
+                            _curr = party[unit_select].arm;
+                            break;
+                        case 2:
+                            _list = filter_accessories(1);
+                            _curr = party[unit_select].acc;
                             break;
                     }
+                    if keyboard_check_released(vk_space) {
+                        if ds_list_size(_list) > 0 {
+                            if _curr != ds_list_find_value(_list,page_select) {
+                                if _curr != -1 {
+                                    _curr.equip.equipped -= 1;
+                                }
+                                switch(page_category) {
+                                    case 0:
+                                        party[unit_select].wpn = ds_list_find_value(_list,page_select);
+                                        break;
+                                    case 1:
+                                        party[unit_select].arm = ds_list_find_value(_list,page_select);
+                                        break;
+                                    case 2:
+                                        party[unit_select].acc = ds_list_find_value(_list,page_select);
+                                        break;
+                                }
+                                ds_list_find_value(_list,page_select).equip.equipped += 1;
+                                page_active = 1;
+                                page_select = 0;
+                            }
+                        }
+                    }
+                    if keyboard_check_released(vk_down) {
+                        if page_select < ds_list_size(_list)-1 {
+                            page_select += 1;
+                        }
+                        else {
+                            page_select = 0;
+                        }
+                    }
+                    if keyboard_check_released(vk_up) {
+                        if page_select > 0 {
+                            page_select -= 1;
+                        }
+                        else {
+                            page_select = max(ds_list_size(_list)-1,0);
+                        }
+                    }
+                    ds_list_destroy(_list);
                     break;
             }
             break;

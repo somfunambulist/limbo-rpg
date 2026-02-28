@@ -21,14 +21,14 @@ gametime = 0;
     inventory[0] = global.item_antidote;
     inventory[1] = global.item_potion;
     inventory[2] = global.item_coin_purse;
-    inventory[3] = global.item_hi_potion;
-    inventory[4] = global.item_mega_potion;
-    inventory[5] = global.item_short_sword;
-    inventory[6] = global.item_rapierb;
-    inventory[7] = global.item_short_swordc;
-    inventory[8] = global.item_rapier;
-    inventory[9] = global.item_short_swordb;
-    inventory[10] = global.item_rapierc;
+    inventory[3] = global.item_short_sword;
+    inventory[4] = global.item_rapierb;
+    inventory[5] = global.item_short_swordc;
+    inventory[6] = global.item_rapier;
+    inventory[7] = global.item_short_swordb;
+    inventory[8] = global.item_rapierc;
+    inventory[9] = global.item_cloak;
+    inventory[10] = global.item_pyjamas;
 
 #region PARTY DATA
 

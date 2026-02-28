@@ -9,6 +9,7 @@ function itemResult() constructor {
 }
 
 function equipResult() constructor {
+    equipped    = 0;
     type        = "";
     facets      = 0;
     pairs       = 0;
@@ -254,7 +255,7 @@ global.item_coin_purse = new itemBuilder()
 global.item_short_sword = new itemBuilder()
     .name("Short Sword")
     .desc("A short but expertly\ncrafted blade.")
-    .amount(1)
+    .amount(2)
     .equip(
      new equipBuilder()
         .type("sword")
@@ -268,7 +269,7 @@ global.item_short_sword = new itemBuilder()
 global.item_short_swordb = new itemBuilder()
     .name("Short Sword B")
     .desc("A short but expertly\ncrafted blade.")
-    .amount(1)
+    .amount(3)
     .equip(
      new equipBuilder()
         .type("sword")
@@ -281,7 +282,7 @@ global.item_short_swordb = new itemBuilder()
 global.item_short_swordc = new itemBuilder()
     .name("Short Sword C")
     .desc("A short but expertly\ncrafted blade.")
-    .amount(1)
+    .amount(2)
     .equip(
      new equipBuilder()
         .type("sword")
@@ -334,5 +335,29 @@ global.item_rapierc = new itemBuilder()
     )
     .build();
 
+global.item_pyjamas = new itemBuilder()
+    .name("Pyjamas")
+    .desc("Blue, striped.")
+    .amount(1)
+    .equip(
+     new equipBuilder()
+        .type("arm")
+        .build()
+    )
+    .build();
+
+global.item_cloak = new itemBuilder()
+    .name("Cloak")
+    .desc("Thick,brown wool. Waxed to\nkeep the weather out.")
+    .amount(3)
+    .equip(
+     new equipBuilder()
+        .type("arm")
+        .facets(2)
+        .add_agi(-1)
+        .add_ins(1)
+        .build()
+    )
+    .build();
 
 #endregion

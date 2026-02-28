@@ -85,3 +85,25 @@ function format_number(n,length) {
     }
     return(r);
 }
+
+function draw_facets(x,y,equip,unit=-1) {
+    var _shadow = make_colour_rgb(25, 30, 60);
+    var _x = x;
+    var _y = y;
+    if equip.facets > 0 {
+        for(i=0;i<equip.facets;i+=1) {
+            draw_sprite_ext(s_facet_slot,0,_x+9*i,_y+1,1,1,0,_shadow,1);
+            if equip.pairs > 0 {
+                if equip.pairs*2 > i && i % 2 != 0 {
+                    draw_rectangle_color(_x+6+9*i-9,_y+3,_x+9+9*i-9,_y+5,_shadow,_shadow,_shadow,_shadow,0);
+                }
+            }
+            draw_sprite_ext(s_facet_slot,0,_x+9*i,_y,1,1,0,c_white,1);
+            if equip.pairs > 0 {
+                if equip.pairs*2 > i && i % 2 != 0 {
+                    draw_rectangle_color(_x+6+9*i-9,_y+2,_x+9+9*i-9,_y+4,c_white,c_white,c_white,c_white,0);
+                }
+            }
+        }
+    }
+}
