@@ -44,6 +44,16 @@ if menu = 1 {
                         break;
                 }
                 break;
+            case "facets" :
+                switch(page_active) {
+                    case 0:
+                        draw_monogram(_x+16,_y+8,c_white,"Select party member.");
+                        break;
+                    case 1:
+                        draw_monogram(_x+16,_y+8,c_white,"Select facet slot.");
+                        break;
+                }
+                break;
             case "status" :
                 draw_monogram(_x+16,_y+8,c_white,"Press Select to read glossary.");
                 draw_monogram(_x+16,_y+8,make_colour_rgb(65, 215, 215),"      Select");
@@ -340,6 +350,43 @@ if menu = 1 {
                 }
                 break;
             case "facets":
+                if page_active = 0 {
+                    draw_box(s_box,_x+0,_y+25,218,215,menuback);
+                    for(i=0;i<4;i+=1) {
+                        if party[i] != -1 {
+                            _u = party[i];
+                            draw_unit_select(_x+16,_y+36+i*50,_u);
+                            draw_monogram(_x+118,_y+36+i*50,c_white,_u.class+"\n"+_u.status+"\nExp\nNxt");
+                            draw_set_halign(fa_right);
+                            draw_monogram(_x+208,_y+60+i*50,c_white,string(_u.xp)+"\n"+string(_u.next));
+                            draw_set_halign(fa_left);
+                        }
+                    }
+                    draw_pointer(_x+8,_y+36+unit_select*50,3,c_white);
+                }
+                else {
+                    //unit info
+                    draw_box(s_box,_x,_y+25,320,60,menuback);
+                    draw_unit_select(_x+8,_y+33,party[unit_select]);
+                    if page_active = 1 {
+                        draw_monogram(_x+112,_y+33,c_white,"Wpn");
+                        if party[unit_select].wpn != -1 {
+                            draw_monogram(_x+136,_y+33,c_white,party[unit_select].wpn.name);
+                            draw_facets(_x+136,_y+45,party[unit_select].wpn.equip)
+                        }
+                        draw_monogram(_x+112,_y+57,c_white,"Arm");
+                        if party[unit_select].arm != -1 {
+                            draw_monogram(_x+136,_y+57,c_white,party[unit_select].arm.name);
+                            draw_facets(_x+136,_y+69,party[unit_select].arm.equip)
+                        }
+                        draw_rectangle_color(_x+126+9*page_select,_y+44+24*page_category,_x+134+9*page_select,_y+53+24*page_category,menuback,menuback,menuback,menuback,0);
+                        draw_pointer(_x+127+9*page_select,_y+45+24*page_category,3,c_white);
+                    }
+                    //list view
+                    draw_box(s_box,_x,_y+86,139,154,menuback);
+                    //item view
+                    draw_box(s_box,_x+140,_y+86,180,154,menuback);
+                }
                 break;
             case "status":
                 //unit navigation
@@ -452,7 +499,7 @@ if menu = 1 {
     #endregion
     
     #region MENU OPTIONS
-        if menu_page = "" || ( menu_page = "equipment" && page_active = 0 ) {
+        if menu_page = "" || ( menu_page = "equipment" && page_active = 0 ) || ( menu_page = "facets" && page_active = 0 ) {
             draw_box(s_box,_x+219,_y+0,101,96,menuback);
             draw_monogram(_x+235,_y+8,c_white,"Items\nMagic\nEquipment\nFacets\nStatus\nJournal\nConfig");
             var _s = 3; if menu_page != "" { _s = 1 }
@@ -465,7 +512,7 @@ if menu = 1 {
     #endregion
     
     #region GENERAL INFO
-        if menu_page = "" || ( menu_page = "equipment" && page_active = 0 ) {
+        if menu_page = "" || ( menu_page = "equipment" && page_active = 0 ) || ( menu_page = "facets" && page_active = 0 ) {
             draw_box(s_box,219,97,_x+101,_y+60,menuback);
             draw_monogram(_x+229,_y+105,c_white,"Gold\nTime"); draw_set_halign(fa_right); draw_monogram(_x+313,_y+105,c_white,string(display_gold)+"g"); draw_set_halign(fa_left);
             var hour = floor(gametime/60/60/60); var minute = floor(gametime/60/60-hour*60*60); var second = floor(gametime/60-hour*60*60-minute*60);
@@ -475,7 +522,7 @@ if menu = 1 {
     #endregion
     
     #region THE UNUSED ONE
-        if menu_page = "" || ( menu_page = "equipment" && page_active = 0 ) {
+        if menu_page = "" || ( menu_page = "equipment" && page_active = 0 ) || ( menu_page = "facets" && page_active = 0 ) {
             draw_box(s_box,219,158,_x+101,_y+82,menuback);
         }
     #endregion
