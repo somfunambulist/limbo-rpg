@@ -14,9 +14,10 @@ gold = 0;
 display_gold = 0;
 gametime = 0;
 
-#region INVENTORY
+#region INVENTORY/FACETS
     for(i=0;i<999;i+=1) {
         inventory[i] = -1;
+        facet_bag[i] = -1;
     }
     inventory[0] = global.item_potion;
     inventory[1] = global.item_coin_purse;
@@ -29,7 +30,14 @@ gametime = 0;
     inventory[8] = global.item_pyjamas;
     inventory[9] = global.item_ruby_ring;
 
-#region PARTY DATA
+    facet_bag[0] = variable_clone(global.facet_flame);
+    facet_bag[1] = variable_clone(global.facet_vigor_plus);
+    facet_bag[2] = variable_clone(global.facet_swipe);
+    facet_bag[3] = variable_clone(global.facet_flame);
+        facet_bag[3].lv = 2;
+#endregion
+
+#region PARTY
 
     party[0] = global.unit_player;
     party[1] = global.unit_pekingente;

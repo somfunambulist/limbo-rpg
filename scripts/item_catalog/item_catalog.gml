@@ -12,6 +12,7 @@ function equipResult() constructor {
     equipped    = 0;
     type        = "";
     facets      = 0;
+    slot        = array_create(10,-1);
     pairs       = 0;
     add_vig     = 0;
     add_str     = 0;

@@ -107,3 +107,12 @@ function draw_facets(x,y,equip,unit=-1) {
         }
     }
 }
+
+function draw_facet(x,y,color) {;
+    var _shadow = make_colour_rgb(25, 30, 60);
+    draw_sprite_ext(s_facet_slot,0,x,y+1,1,1,0,_shadow,1);
+    if color != -1 {
+        draw_sprite_ext(s_facet_slot,1,x,y,1,1,0,color,1);
+    }
+    draw_sprite_ext(s_facet_slot,0,x,y,1,1,0,c_white,1);
+}

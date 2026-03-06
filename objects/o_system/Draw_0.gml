@@ -384,6 +384,19 @@ if menu = 1 {
                     }
                     //list view
                     draw_box(s_box,_x,_y+86,139,154,menuback);
+                    draw_monogram(_x+16,_y+97,c_white,"Facets");
+                    for(i=0;i<10;i+=1) {
+                        if facet_bag[i] != -1 {
+                            draw_facet(_x+17,_y+111+i*12,facet_bag[i].color);
+                            draw_monogram(_x+26,_y+111+i*12,c_white,facet_bag[i].name);
+                            draw_smallfont(_x+118,_y+111+i*12,c_white,"L");
+                            draw_smallfont(_x+121,_y+111+i*12,c_white,":");
+                            draw_smallfont(_x+124,_y+111+i*12,c_white,string(facet_bag[i].lv));
+                        }
+                        else {
+                            i = 9999;
+                        }
+                    }
                     //item view
                     draw_box(s_box,_x+140,_y+86,180,154,menuback);
                 }
